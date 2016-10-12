@@ -15,8 +15,6 @@
  */
 package com.alibaba.dubbo.common.serialize.support.kryo;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.Serializer;
 import com.esotericsoftware.kryo.serializers.JavaSerializer;
@@ -26,7 +24,7 @@ import com.esotericsoftware.kryo.serializers.JavaSerializer;
  */
 public class CompatibleKryo extends Kryo {
 
-    private static final Logger logger = LoggerFactory.getLogger(CompatibleKryo.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CompatibleKryo.class);
 
     @Override
     public Serializer getDefaultSerializer(Class type) {

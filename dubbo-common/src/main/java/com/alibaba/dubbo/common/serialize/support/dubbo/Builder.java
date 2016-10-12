@@ -15,6 +15,16 @@
  */
 package com.alibaba.dubbo.common.serialize.support.dubbo;
 
+import com.alibaba.dubbo.common.bytecode.ClassGenerator;
+import com.alibaba.dubbo.common.io.UnsafeByteArrayInputStream;
+import com.alibaba.dubbo.common.io.UnsafeByteArrayOutputStream;
+import com.alibaba.dubbo.common.serialize.support.java.CompactedObjectInputStream;
+import com.alibaba.dubbo.common.serialize.support.java.CompactedObjectOutputStream;
+import com.alibaba.dubbo.common.utils.ClassHelper;
+import com.alibaba.dubbo.common.utils.IOUtils;
+import com.alibaba.dubbo.common.utils.ReflectUtils;
+import com.alibaba.dubbo.common.utils.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -37,18 +47,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 
-import com.alibaba.dubbo.common.bytecode.ClassGenerator;
-import com.alibaba.dubbo.common.io.UnsafeByteArrayInputStream;
-import com.alibaba.dubbo.common.io.UnsafeByteArrayOutputStream;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.serialize.support.java.CompactedObjectInputStream;
-import com.alibaba.dubbo.common.serialize.support.java.CompactedObjectOutputStream;
-import com.alibaba.dubbo.common.utils.ClassHelper;
-import com.alibaba.dubbo.common.utils.IOUtils;
-import com.alibaba.dubbo.common.utils.ReflectUtils;
-import com.alibaba.dubbo.common.utils.StringUtils;
-
 /**
  * Builder.
  * 
@@ -61,7 +59,7 @@ import com.alibaba.dubbo.common.utils.StringUtils;
 public abstract class Builder<T> implements GenericDataFlags
 {
 	// Must be protected. by qian.lei
-	protected static Logger logger = LoggerFactory.getLogger(Builder.class);
+	protected static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Builder.class);
 
 	private static final AtomicLong BUILDER_CLASS_COUNTER = new AtomicLong(0);
 

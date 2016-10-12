@@ -15,16 +15,11 @@
  */
 package com.alibaba.dubbo.rpc.protocol.dubbo;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.Version;
 import com.alibaba.dubbo.common.io.Bytes;
 import com.alibaba.dubbo.common.io.UnsafeByteArrayInputStream;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.serialize.ObjectInput;
 import com.alibaba.dubbo.common.serialize.ObjectOutput;
 import com.alibaba.dubbo.common.serialize.OptimizedSerialization;
@@ -32,7 +27,7 @@ import com.alibaba.dubbo.common.serialize.Serialization;
 import com.alibaba.dubbo.common.utils.ReflectUtils;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.Channel;
-import com.alibaba.dubbo.remoting.Codec2;
+import com.alibaba.dubbo.remoting.Codec;
 import com.alibaba.dubbo.remoting.exchange.Request;
 import com.alibaba.dubbo.remoting.exchange.Response;
 import com.alibaba.dubbo.remoting.exchange.codec.ExchangeCodec;
@@ -40,6 +35,9 @@ import com.alibaba.dubbo.remoting.transport.CodecSupport;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcInvocation;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.alibaba.dubbo.rpc.protocol.dubbo.CallbackServiceCodec.encodeInvocationArgument;
 
@@ -49,9 +47,9 @@ import static com.alibaba.dubbo.rpc.protocol.dubbo.CallbackServiceCodec.encodeIn
  * @author qianlei
  * @author chao.liuc
  */
-public class DubboCodec extends ExchangeCodec implements Codec2 {
+public class DubboCodec extends ExchangeCodec implements Codec {
 
-    private static final Logger log = LoggerFactory.getLogger(DubboCodec.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DubboCodec.class);
 
     public static final String NAME = "dubbo";
 
@@ -85,7 +83,8 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                 try {
                     Object data;
                     if (res.isHeartbeat()) {
-                        data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));
+                        //data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));
+                        throw new UnsupportedOperationException();
                     } else if (res.isEvent()) {
                         data = decodeEventData(channel, deserialize(s, channel.getUrl(), is));
                     } else {
@@ -105,8 +104,8 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                     }
                     res.setResult(data);
                 } catch (Throwable t) {
-                    if (log.isWarnEnabled()) {
-                        log.warn("Decode response failed: " + t.getMessage(), t);
+                    if (logger.isWarnEnabled()) {
+                        logger.warn("Decode response failed: " + t.getMessage(), t);
                     }
                     res.setStatus(Response.CLIENT_ERROR);
                     res.setErrorMessage(StringUtils.toString(t));
@@ -126,7 +125,8 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
             try {
                 Object data;
                 if (req.isHeartbeat()) {
-                    data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));
+                    //data = decodeHeartbeatData(channel, deserialize(s, channel.getUrl(), is));
+                    throw new UnsupportedOperationException();
                 } else if (req.isEvent()) {
                     data = decodeEventData(channel, deserialize(s, channel.getUrl(), is));
                 } else {
@@ -144,8 +144,8 @@ public class DubboCodec extends ExchangeCodec implements Codec2 {
                 }
                 req.setData(data);
             } catch (Throwable t) {
-                if (log.isWarnEnabled()) {
-                    log.warn("Decode request failed: " + t.getMessage(), t);
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Decode request failed: " + t.getMessage(), t);
                 }
                 // bad request
                 req.setBroken(true);

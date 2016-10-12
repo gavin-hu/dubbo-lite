@@ -15,17 +15,11 @@
  */
 package com.alibaba.dubbo.rpc.filter;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.beanutil.JavaBeanAccessor;
 import com.alibaba.dubbo.common.beanutil.JavaBeanDescriptor;
 import com.alibaba.dubbo.common.beanutil.JavaBeanSerializeUtil;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.PojoUtils;
 import com.alibaba.dubbo.common.utils.ReflectUtils;
 import com.alibaba.dubbo.rpc.Filter;
@@ -38,6 +32,10 @@ import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.service.GenericException;
 import com.alibaba.dubbo.rpc.support.ProtocolUtils;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 /**
  * GenericImplInvokerFilter
  * 
@@ -46,7 +44,7 @@ import com.alibaba.dubbo.rpc.support.ProtocolUtils;
 @Activate(group = Constants.CONSUMER, value = Constants.GENERIC_KEY, order = 20000)
 public class GenericImplFilter implements Filter {
     
-    private static final Logger logger = LoggerFactory.getLogger(GenericImplFilter.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(GenericImplFilter.class);
 
     private static final Class<?>[] GENERIC_PARAMETER_TYPES = new Class<?>[] {String.class, String[].class, Object[].class};
 

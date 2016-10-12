@@ -15,23 +15,20 @@
  */
 package com.alibaba.dubbo.rpc.cluster.support;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.Version;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
-import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.cluster.Directory;
 import com.alibaba.dubbo.rpc.cluster.LoadBalance;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 失败转移，当出现失败，重试其它服务器，通常用于读操作，但重试会带来更长延迟。
@@ -43,7 +40,7 @@ import com.alibaba.dubbo.rpc.cluster.LoadBalance;
  */
 public class FailoverClusterInvoker<T> extends AbstractClusterInvoker<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(FailoverClusterInvoker.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(FailoverClusterInvoker.class);
 
     public FailoverClusterInvoker(Directory<T> directory) {
         super(directory);
@@ -72,7 +69,6 @@ public class FailoverClusterInvoker<T> extends AbstractClusterInvoker<T> {
         	}
             Invoker<T> invoker = select(loadbalance, invocation, copyinvokers, invoked);
             invoked.add(invoker);
-            RpcContext.getContext().setInvokers((List)invoked);
             try {
                 Result result = invoker.invoke(invocation);
                 if (le != null && logger.isWarnEnabled()) {

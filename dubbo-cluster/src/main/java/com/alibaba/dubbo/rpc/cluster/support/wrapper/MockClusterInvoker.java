@@ -15,12 +15,8 @@
  */
 package com.alibaba.dubbo.rpc.cluster.support.wrapper;
 
-import java.util.List;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
@@ -31,12 +27,14 @@ import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.cluster.Directory;
 import com.alibaba.dubbo.rpc.support.MockInvoker;
 
+import java.util.List;
+
 /**
  * @author chao.liuc
  */
 public class MockClusterInvoker<T> implements Invoker<T>{
 	
-	private static final Logger logger = LoggerFactory.getLogger(MockClusterInvoker.class);
+	private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MockClusterInvoker.class);
 
 	private final Directory<T> directory ;
 	

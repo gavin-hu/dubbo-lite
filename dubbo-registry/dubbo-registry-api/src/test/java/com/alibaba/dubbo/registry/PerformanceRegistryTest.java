@@ -15,15 +15,11 @@
  */
 package com.alibaba.dubbo.registry;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NetUtils;
+import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * RegistryPerformanceTest
@@ -32,7 +28,7 @@ import com.alibaba.dubbo.common.utils.NetUtils;
  */
 public class PerformanceRegistryTest extends TestCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(PerformanceRegistryTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PerformanceRegistryTest.class);
 
     @Test
     public void testRegistry() {

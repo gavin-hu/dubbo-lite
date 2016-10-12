@@ -48,9 +48,6 @@ public class ContextFilter implements Filter {
             attachments.remove(Constants.TIMEOUT_KEY);
         }
         RpcContext.getContext()
-                .setInvoker(invoker)
-                .setInvocation(invocation)
-//                .setAttachments(attachments)  // modified by lishen
                 .setLocalAddress(invoker.getUrl().getHost(),
                         invoker.getUrl().getPort());
 

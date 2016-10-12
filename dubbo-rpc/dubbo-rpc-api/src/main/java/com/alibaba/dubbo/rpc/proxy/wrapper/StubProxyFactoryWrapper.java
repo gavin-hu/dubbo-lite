@@ -15,14 +15,10 @@
  */
 package com.alibaba.dubbo.rpc.proxy.wrapper;
 
-import java.lang.reflect.Constructor;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.Version;
 import com.alibaba.dubbo.common.bytecode.Wrapper;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ConfigUtils;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.common.utils.ReflectUtils;
@@ -34,6 +30,8 @@ import com.alibaba.dubbo.rpc.ProxyFactory;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.service.GenericService;
 
+import java.lang.reflect.Constructor;
+
 /**
  * StubProxyFactoryWrapper
  * 
@@ -41,7 +39,7 @@ import com.alibaba.dubbo.rpc.service.GenericService;
  */
 public class StubProxyFactoryWrapper implements ProxyFactory {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(StubProxyFactoryWrapper.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(StubProxyFactoryWrapper.class);
     
     private final ProxyFactory proxyFactory;
     
@@ -85,14 +83,14 @@ public class StubProxyFactoryWrapper implements ProxyFactory {
                             try{
                                 export(proxy, (Class)invoker.getInterface(), url);
                             }catch (Exception e) {
-                                LOGGER.error("export a stub service error.", e);
+                                logger.error("export a stub service error.", e);
                             }
                         }
                     } catch (NoSuchMethodException e) {
                         throw new IllegalStateException("No such constructor \"public " + stubClass.getSimpleName() + "(" + serviceType.getName() + ")\" in stub implemention class " + stubClass.getName(), e);
                     }
                 } catch (Throwable t) {
-                    LOGGER.error("Failed to create stub implemention class " + stub + " in consumer " + NetUtils.getLocalHost() + " use dubbo version " + Version.getVersion() + ", cause: " + t.getMessage(), t);
+                    logger.error("Failed to create stub implemention class " + stub + " in consumer " + NetUtils.getLocalHost() + " use dubbo version " + Version.getVersion() + ", cause: " + t.getMessage(), t);
                     // ignore
                 }
             }

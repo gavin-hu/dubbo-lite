@@ -15,20 +15,20 @@
  */
 package com.alibaba.dubbo.config;
 
-import java.util.Map;
-
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
 import com.alibaba.dubbo.common.serialize.Serialization;
 import com.alibaba.dubbo.common.status.StatusChecker;
 import com.alibaba.dubbo.common.threadpool.ThreadPool;
 import com.alibaba.dubbo.config.support.Parameter;
 import com.alibaba.dubbo.registry.support.AbstractRegistryFactory;
-import com.alibaba.dubbo.remoting.Dispatcher;
 import com.alibaba.dubbo.remoting.Codec;
+import com.alibaba.dubbo.remoting.Dispatcher;
 import com.alibaba.dubbo.remoting.Transporter;
 import com.alibaba.dubbo.remoting.exchange.Exchanger;
 import com.alibaba.dubbo.remoting.telnet.TelnetHandler;
 import com.alibaba.dubbo.rpc.Protocol;
+
+import java.util.Map;
 
 /**
  * ProtocolConfig
@@ -176,17 +176,6 @@ public class ProtocolConfig extends AbstractConfig {
 
     public void setPort(Integer port) {
         this.port = port;
-    }
-
-    @Deprecated
-    @Parameter(excluded = true)
-    public String getPath() {
-        return getContextpath();
-    }
-
-    @Deprecated
-    public void setPath(String path) {
-        setContextpath(path);
     }
 
     @Parameter(excluded = true)
@@ -375,25 +364,6 @@ public class ProtocolConfig extends AbstractConfig {
     public void setExchanger(String exchanger) {
         checkExtension(Exchanger.class, "exchanger", exchanger);
         this.exchanger = exchanger;
-    }
-
-    /**
-     * 单词拼写错误，请使用{@link #getDispatcher()}
-     * @deprecated {@link #getDispatcher()}
-     */
-    @Deprecated
-    @Parameter(excluded = true)
-    public String getDispather() {
-        return getDispatcher();
-    }
-
-    /**
-     * 单词拼写错误，请使用{@link #setDispatcher(String)
-     * @deprecated {@link #setDispatcher(String)}
-     */
-    @Deprecated
-    public void setDispather(String dispather) {
-        setDispatcher(dispather);
     }
 
     public String getDispatcher() {

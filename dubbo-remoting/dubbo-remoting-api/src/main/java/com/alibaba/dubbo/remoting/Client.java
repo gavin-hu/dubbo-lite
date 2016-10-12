@@ -32,7 +32,4 @@ public interface Client extends Endpoint, Channel, Resetable {
      */
     void reconnect() throws RemotingException;
     
-    @Deprecated
-    void reset(com.alibaba.dubbo.common.Parameters parameters);
-    
 }

@@ -15,14 +15,9 @@
  */
 package com.alibaba.dubbo.remoting.transport.dispatcher;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.store.DataStore;
 import com.alibaba.dubbo.common.threadpool.ThreadPool;
 import com.alibaba.dubbo.common.utils.NamedThreadFactory;
@@ -31,9 +26,12 @@ import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.RemotingException;
 import com.alibaba.dubbo.remoting.transport.ChannelHandlerDelegate;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class WrappedChannelHandler implements ChannelHandlerDelegate {
     
-    protected static final Logger logger = LoggerFactory.getLogger(WrappedChannelHandler.class);
+    protected static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(WrappedChannelHandler.class);
 
     protected static final ExecutorService SHARED_EXECUTOR = Executors.newCachedThreadPool(new NamedThreadFactory("DubboSharedHandler", true));
     

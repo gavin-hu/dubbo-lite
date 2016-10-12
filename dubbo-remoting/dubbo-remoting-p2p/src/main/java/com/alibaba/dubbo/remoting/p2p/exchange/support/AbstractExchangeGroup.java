@@ -15,13 +15,7 @@
  */
 package com.alibaba.dubbo.remoting.p2p.exchange.support;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.Client;
 import com.alibaba.dubbo.remoting.RemotingException;
@@ -35,6 +29,10 @@ import com.alibaba.dubbo.remoting.p2p.Peer;
 import com.alibaba.dubbo.remoting.p2p.exchange.ExchangeGroup;
 import com.alibaba.dubbo.remoting.p2p.exchange.ExchangePeer;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * AbstractGroup
  * 
@@ -43,7 +41,7 @@ import com.alibaba.dubbo.remoting.p2p.exchange.ExchangePeer;
 public abstract class AbstractExchangeGroup implements ExchangeGroup {
 
     // 日志输出
-    protected static final Logger logger = LoggerFactory.getLogger(AbstractExchangeGroup.class);
+    protected static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractExchangeGroup.class);
     
     protected final URL url;
     

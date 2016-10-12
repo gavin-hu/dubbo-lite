@@ -93,7 +93,7 @@ public class ConnectionOrderedChannelHandler extends WrappedChannelHandler {
     
     private void checkQueueLength(){
         if (connectionExecutor.getQueue().size() > queuewarninglimit){
-            logger.warn(new IllegalThreadStateException("connectionordered channel handler `queue size: "+connectionExecutor.getQueue().size()+" exceed the warning limit number :"+queuewarninglimit));
+            logger.warn("", new IllegalThreadStateException("connectionordered channel handler `queue size: "+connectionExecutor.getQueue().size()+" exceed the warning limit number :"+queuewarninglimit));
         }
     }
 }

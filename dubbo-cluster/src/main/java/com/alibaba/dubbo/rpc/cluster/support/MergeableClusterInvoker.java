@@ -15,6 +15,21 @@
  */
 package com.alibaba.dubbo.rpc.cluster.support;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.ExtensionLoader;
+import com.alibaba.dubbo.common.utils.ConfigUtils;
+import com.alibaba.dubbo.common.utils.NamedThreadFactory;
+import com.alibaba.dubbo.rpc.Invocation;
+import com.alibaba.dubbo.rpc.Invoker;
+import com.alibaba.dubbo.rpc.Result;
+import com.alibaba.dubbo.rpc.RpcException;
+import com.alibaba.dubbo.rpc.RpcInvocation;
+import com.alibaba.dubbo.rpc.RpcResult;
+import com.alibaba.dubbo.rpc.cluster.Directory;
+import com.alibaba.dubbo.rpc.cluster.Merger;
+import com.alibaba.dubbo.rpc.cluster.merger.MergerFactory;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -28,30 +43,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.ConfigUtils;
-import com.alibaba.dubbo.common.utils.NamedThreadFactory;
-import com.alibaba.dubbo.rpc.Invocation;
-import com.alibaba.dubbo.rpc.Invoker;
-import com.alibaba.dubbo.rpc.Result;
-import com.alibaba.dubbo.rpc.RpcException;
-import com.alibaba.dubbo.rpc.RpcInvocation;
-import com.alibaba.dubbo.rpc.RpcResult;
-import com.alibaba.dubbo.rpc.cluster.Directory;
-import com.alibaba.dubbo.rpc.cluster.Merger;
-import com.alibaba.dubbo.rpc.cluster.merger.MergerFactory;
-
 /**
  * @author <a href="mailto:gang.lvg@alibaba-inc.com">kimi</a>
  */
 @SuppressWarnings( "unchecked" )
 public class MergeableClusterInvoker<T> implements Invoker<T> {
 
-    private static final Logger log = LoggerFactory.getLogger(MergeableClusterInvoker.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MergeableClusterInvoker.class);
 
     private ExecutorService executor = Executors.newCachedThreadPool(new NamedThreadFactory("mergeable-cluster-executor", true));
     
@@ -103,7 +101,7 @@ public class MergeableClusterInvoker<T> implements Invoker<T> {
             try {
                 Result r = future.get(timeout, TimeUnit.MILLISECONDS);
                 if (r.hasException()) {
-                    log.error(new StringBuilder(32).append("Invoke ")
+                    logger.error(new StringBuilder(32).append("Invoke ")
                                   .append(getGroupDescFromServiceKey(entry.getKey()))
                                   .append(" failed: ")
                                   .append(r.getException().getMessage()).toString(),

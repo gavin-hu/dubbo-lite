@@ -51,7 +51,6 @@ public class ReferenceConfigTest {
         rc.setApplication(application);
         rc.setRegistry(registry);
         rc.setInterface(DemoService.class.getName());
-        rc.setInjvm(false);
 
         try {
             demoService.export();

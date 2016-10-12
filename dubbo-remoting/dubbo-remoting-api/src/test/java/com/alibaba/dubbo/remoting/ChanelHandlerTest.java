@@ -15,16 +15,12 @@
  */
 package com.alibaba.dubbo.remoting;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
 import com.alibaba.dubbo.remoting.exchange.Exchangers;
 import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
+import junit.framework.TestCase;
+import org.junit.Test;
 
 /**
  * ChanelHandlerTest
@@ -35,7 +31,7 @@ import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
  */
 public class ChanelHandlerTest extends TestCase {
     
-    private static final Logger logger = LoggerFactory.getLogger(ChanelHandlerTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ChanelHandlerTest.class);
 
     @Test
     public void testClient() throws Throwable {

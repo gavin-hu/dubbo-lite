@@ -15,12 +15,10 @@
  */
 package com.alibaba.dubbo.common.threadpool.support;
 
+import com.alibaba.dubbo.common.URL;
+
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 
 /**
  * Abort Policy.
@@ -30,7 +28,7 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
  */
 public class AbortPolicyWithReport extends ThreadPoolExecutor.AbortPolicy {
     
-    protected static final Logger logger = LoggerFactory.getLogger(AbortPolicyWithReport.class);
+    protected static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AbortPolicyWithReport.class);
     
     private final String threadName;
     

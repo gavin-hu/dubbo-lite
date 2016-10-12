@@ -97,24 +97,6 @@ public abstract class AbstractReferenceConfig extends AbstractInterfaceConfig {
         return generic;
     }
 
-    /**
-     * @return
-     * @deprecated 通过scope进行判断，scope=local
-     */
-    @Deprecated
-    public Boolean isInjvm() {
-        return injvm;
-    }
-    
-    /**
-     * @param injvm
-     * @deprecated 通过scope设置，scope=local表示使用injvm协议.
-     */
-    @Deprecated 
-    public void setInjvm(Boolean injvm) {
-        this.injvm = injvm;
-    }
-
     @Parameter(key = Constants.REFERENCE_FILTER_KEY, append = true)
     public String getFilter() {
         return super.getFilter();

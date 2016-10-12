@@ -15,6 +15,12 @@
  */
 package com.alibaba.dubbo.monitor.dubbo;
 
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.utils.NamedThreadFactory;
+import com.alibaba.dubbo.monitor.Monitor;
+import com.alibaba.dubbo.monitor.MonitorService;
+import com.alibaba.dubbo.rpc.Invoker;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,14 +31,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.NamedThreadFactory;
-import com.alibaba.dubbo.monitor.Monitor;
-import com.alibaba.dubbo.monitor.MonitorService;
-import com.alibaba.dubbo.rpc.Invoker;
-
 /**
  * DubboMonitor
  * 
@@ -40,7 +38,7 @@ import com.alibaba.dubbo.rpc.Invoker;
  */
 public class DubboMonitor implements Monitor {
     
-    private static final Logger logger = LoggerFactory.getLogger(DubboMonitor.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DubboMonitor.class);
     
     private static final int LENGTH = 10;
     

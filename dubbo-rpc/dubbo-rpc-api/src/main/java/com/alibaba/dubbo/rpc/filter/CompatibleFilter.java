@@ -15,12 +15,7 @@
  */
 package com.alibaba.dubbo.rpc.filter;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.CompatibleTypeUtils;
 import com.alibaba.dubbo.common.utils.PojoUtils;
 import com.alibaba.dubbo.rpc.Filter;
@@ -30,6 +25,9 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcResult;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+
 /**
  * CompatibleFilter
  * 
@@ -37,7 +35,7 @@ import com.alibaba.dubbo.rpc.RpcResult;
  */
 public class CompatibleFilter implements Filter {
     
-    private static Logger logger = LoggerFactory.getLogger(CompatibleFilter.class);
+    private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CompatibleFilter.class);
 
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         Result result = invoker.invoke(invocation);

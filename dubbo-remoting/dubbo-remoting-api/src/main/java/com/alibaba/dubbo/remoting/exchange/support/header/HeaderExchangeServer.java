@@ -15,20 +15,9 @@
  */
 package com.alibaba.dubbo.remoting.exchange.support.header;
 
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.Version;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NamedThreadFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.ChannelHandler;
@@ -39,6 +28,15 @@ import com.alibaba.dubbo.remoting.exchange.ExchangeServer;
 import com.alibaba.dubbo.remoting.exchange.Request;
 import com.alibaba.dubbo.remoting.exchange.support.DefaultFuture;
 
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
 /**
  * ExchangeServerImpl
  * 
@@ -46,7 +44,7 @@ import com.alibaba.dubbo.remoting.exchange.support.DefaultFuture;
  */
 public class HeaderExchangeServer implements ExchangeServer {
     
-    protected final Logger        logger = LoggerFactory.getLogger(getClass());
+    protected final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass());
 
     private final ScheduledExecutorService scheduled                 = Executors.newScheduledThreadPool(1,
                                                                                                         new NamedThreadFactory(
@@ -210,11 +208,6 @@ public class HeaderExchangeServer implements ExchangeServer {
         } catch (Throwable t) {
             logger.error(t.getMessage(), t);
         }
-    }
-    
-    @Deprecated
-    public void reset(com.alibaba.dubbo.common.Parameters parameters){
-        reset(getUrl().addParameters(parameters.getParameters()));
     }
 
     public void send(Object message) throws RemotingException {

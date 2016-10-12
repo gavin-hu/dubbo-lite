@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 
-import com.alibaba.com.caucho.hessian.io.Hessian2Input;
 import com.alibaba.dubbo.common.serialize.ObjectInput;
+import com.caucho.hessian.io.Hessian2Input;
 
 /**
  * Hessian2 Object input.

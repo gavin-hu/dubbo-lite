@@ -25,10 +25,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.caucho.hessian.io.Hessian2Input;
+import com.caucho.hessian.io.Hessian2Output;
 import org.junit.Test;
 
-import com.alibaba.com.caucho.hessian.io.Hessian2Input;
-import com.alibaba.com.caucho.hessian.io.Hessian2Output;
 import com.alibaba.dubbo.common.io.Bytes;
 import com.alibaba.dubbo.common.serialize.support.dubbo.Builder;
 import com.alibaba.dubbo.common.serialize.support.java.CompactedObjectInputStream;

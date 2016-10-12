@@ -16,28 +16,26 @@
 
 package com.alibaba.dubbo.rpc.protocol.dubbo;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.serialize.Cleanable;
 import com.alibaba.dubbo.common.serialize.ObjectInput;
-import com.alibaba.dubbo.common.serialize.OptimizedSerialization;
-import com.alibaba.dubbo.common.serialize.support.kryo.KryoSerialization;
 import com.alibaba.dubbo.common.utils.Assert;
 import com.alibaba.dubbo.common.utils.ReflectUtils;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.Codec;
 import com.alibaba.dubbo.remoting.Decodeable;
+import com.alibaba.dubbo.remoting.buffer.ChannelBuffer;
+import com.alibaba.dubbo.remoting.buffer.ChannelBufferInputStream;
 import com.alibaba.dubbo.remoting.exchange.Request;
 import com.alibaba.dubbo.remoting.transport.CodecSupport;
 import com.alibaba.dubbo.rpc.RpcInvocation;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.alibaba.dubbo.rpc.protocol.dubbo.CallbackServiceCodec.decodeInvocationArgument;
 
@@ -46,7 +44,7 @@ import static com.alibaba.dubbo.rpc.protocol.dubbo.CallbackServiceCodec.decodeIn
  */
 public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Decodeable {
 
-    private static final Logger log = LoggerFactory.getLogger(DecodeableRpcInvocation.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DecodeableRpcInvocation.class);
 
     private Channel     channel;
 
@@ -73,8 +71,8 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
             try {
                 decode(channel, inputStream);
             } catch (Throwable e) {
-                if (log.isWarnEnabled()) {
-                    log.warn("Decode rpc invocation failed: " + e.getMessage(), e);
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Decode rpc invocation failed: " + e.getMessage(), e);
                 }
                 request.setBroken(true);
                 request.setData(e);
@@ -116,8 +114,8 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
                                 args[i] = in.readObject();
                                 pts[i] = args[i].getClass();
                             } catch (Exception e) {
-                                if (log.isWarnEnabled()) {
-                                    log.warn("Decode argument failed: " + e.getMessage(), e);
+                                if (logger.isWarnEnabled()) {
+                                    logger.warn("Decode argument failed: " + e.getMessage(), e);
                                 }
                             }
                         }
@@ -134,8 +132,8 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
                             try {
                                 args[i] = in.readObject(pts[i]);
                             } catch (Exception e) {
-                                if (log.isWarnEnabled()) {
-                                    log.warn("Decode argument failed: " + e.getMessage(), e);
+                                if (logger.isWarnEnabled()) {
+                                    logger.warn("Decode argument failed: " + e.getMessage(), e);
                                 }
                             }
                         }
@@ -169,6 +167,17 @@ public class DecodeableRpcInvocation extends RpcInvocation implements Codec, Dec
             }
         }
         return this;
+    }
+
+    @Override
+    public void encode(Channel channel, ChannelBuffer buffer, Object message) throws IOException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Object decode(Channel channel, ChannelBuffer buffer) throws IOException {
+        ChannelBufferInputStream input = new ChannelBufferInputStream(buffer);
+        return decode(channel, input);
     }
 
 }

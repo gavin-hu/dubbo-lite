@@ -505,9 +505,6 @@ public class Constants {
      */
     public static final String  CHANNEL_CALLBACK_KEY               = "channel.callback.invokers.key";
 
-    @Deprecated
-    public static final String  SHUTDOWN_WAIT_SECONDS_KEY          = "dubbo.service.shutdown.wait.seconds";
-
     public static final String  SHUTDOWN_WAIT_KEY                  = "dubbo.service.shutdown.wait";
 
     public static final String  IS_SERVER_KEY                      = "isserver";

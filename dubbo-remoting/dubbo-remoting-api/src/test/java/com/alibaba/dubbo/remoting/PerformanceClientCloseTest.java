@@ -15,17 +15,13 @@
  */
 package com.alibaba.dubbo.remoting;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
 import com.alibaba.dubbo.remoting.exchange.Exchangers;
+import junit.framework.TestCase;
+import org.junit.Test;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * ProformanceClient
@@ -35,7 +31,7 @@ import com.alibaba.dubbo.remoting.exchange.Exchangers;
  */
 public class PerformanceClientCloseTest extends TestCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(PerformanceClientCloseTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PerformanceClientCloseTest.class);
 
     @Test
     public void testClient() throws Throwable {

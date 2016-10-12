@@ -15,12 +15,8 @@
  */
 package com.alibaba.dubbo.remoting.exchange.support.header;
 
-import java.net.InetSocketAddress;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.Channel;
@@ -34,6 +30,8 @@ import com.alibaba.dubbo.remoting.exchange.Response;
 import com.alibaba.dubbo.remoting.exchange.support.DefaultFuture;
 import com.alibaba.dubbo.remoting.transport.ChannelHandlerDelegate;
 
+import java.net.InetSocketAddress;
+
 /**
  * ExchangeReceiver
  * 
@@ -42,7 +40,7 @@ import com.alibaba.dubbo.remoting.transport.ChannelHandlerDelegate;
  */
 public class HeaderExchangeHandler implements ChannelHandlerDelegate {
 
-    protected static final Logger logger              = LoggerFactory.getLogger(HeaderExchangeHandler.class);
+    protected static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(HeaderExchangeHandler.class);
 
     public static String          KEY_READ_TIMESTAMP  = HeartbeatHandler.KEY_READ_TIMESTAMP;
 

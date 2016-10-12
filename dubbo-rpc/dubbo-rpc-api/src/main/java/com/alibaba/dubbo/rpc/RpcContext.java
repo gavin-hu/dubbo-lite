@@ -95,15 +95,6 @@ public class RpcContext {
     private Object request;
     private Object response;
 
-	@Deprecated
-    private List<Invoker<?>> invokers;
-    
-	@Deprecated
-    private Invoker<?> invoker;
-
-	@Deprecated
-    private Invocation invocation;
-    
 	protected RpcContext() {
 	}
 
@@ -536,77 +527,6 @@ public class RpcContext {
         return values.get(key);
     }
 
-    public RpcContext setInvokers(List<Invoker<?>> invokers) {
-        this.invokers = invokers;
-        if (invokers != null && invokers.size() > 0) {
-            List<URL> urls = new ArrayList<URL>(invokers.size());
-            for (Invoker<?> invoker : invokers) {
-                urls.add(invoker.getUrl());
-            }
-            setUrls(urls);
-        }
-        return this;
-    }
-
-    public RpcContext setInvoker(Invoker<?> invoker) {
-        this.invoker = invoker;
-        if (invoker != null) {
-            setUrl(invoker.getUrl());
-        }
-        return this;
-    }
-
-    public RpcContext setInvocation(Invocation invocation) {
-        this.invocation = invocation;
-        if (invocation != null) {
-            setMethodName(invocation.getMethodName());
-            setParameterTypes(invocation.getParameterTypes());
-            setArguments(invocation.getArguments());
-        }
-        return this;
-    }
-
-    /**
-     * @deprecated Replace to isProviderSide()
-     */
-    @Deprecated
-    public boolean isServerSide() {
-        return isProviderSide();
-    }
-    
-    /**
-     * @deprecated Replace to isConsumerSide()
-     */
-    @Deprecated
-    public boolean isClientSide() {
-        return isConsumerSide();
-    }
-    
-    /**
-     * @deprecated Replace to getUrls()
-     */
-    @Deprecated
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public List<Invoker<?>> getInvokers() {
-        return invokers == null && invoker != null ? (List)Arrays.asList(invoker) : invokers;
-    }
-
-    /**
-     * @deprecated Replace to getUrl()
-     */
-    @Deprecated
-    public Invoker<?> getInvoker() {
-        return invoker;
-    }
-
-    /**
-     * @deprecated Replace to getMethodName(), getParameterTypes(), getArguments()
-     */
-    @Deprecated
-    public Invocation getInvocation() {
-        return invocation;
-    }
-    
     /**
      * 异步调用 ，需要返回值，即使步调用Future.get方法，也会处理调用超时问题.
      * @param callable
@@ -661,12 +581,12 @@ public class RpcContext {
     
 	/**
 	 * oneway调用，只发送请求，不接收返回结果.
-	 * @param callable
+	 * @param runnable
 	 */
-	public void asyncCall(Runnable runable) {
+	public void asyncCall(Runnable runnable) {
     	try {
     		setAttachment(Constants.RETURN_KEY, Boolean.FALSE.toString());
-    		runable.run();
+    		runnable.run();
 		} catch (Throwable e) {
 			//FIXME 异常是否应该放在future中？
 			throw new RpcException("oneway call error ." + e.getMessage(), e);

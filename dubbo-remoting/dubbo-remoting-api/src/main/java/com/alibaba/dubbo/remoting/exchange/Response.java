@@ -133,13 +133,6 @@ public class Response {
         return mEvent && HEARTBEAT_EVENT == mResult;
     }
 
-    @Deprecated
-    public void setHeartbeat(boolean isHeartbeat) {
-        if (isHeartbeat) {
-            setEvent(HEARTBEAT_EVENT);
-        }
-    }
-
     public Object getResult() {
         return mResult;
     }

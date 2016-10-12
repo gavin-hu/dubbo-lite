@@ -328,7 +328,6 @@ public class ExchangeCodecTest extends TelnetCodecTest{
         ChannelBuffer encodeBuffer = ChannelBuffers.dynamicBuffer(1024);
         Channel channel = getCliendSideChannel(url);
         Response response = new Response();
-        response.setHeartbeat(true);
         response.setId(1001l);
         response.setStatus((byte)20 );
         response.setVersion("11");
@@ -357,7 +356,6 @@ public class ExchangeCodecTest extends TelnetCodecTest{
         ChannelBuffer encodeBuffer = ChannelBuffers.dynamicBuffer(1024);
         Channel channel = getCliendSideChannel(url);
         Response response = new Response();
-        response.setHeartbeat(true);
         response.setId(1001l);
         response.setStatus((byte)10 );
         response.setVersion("11");

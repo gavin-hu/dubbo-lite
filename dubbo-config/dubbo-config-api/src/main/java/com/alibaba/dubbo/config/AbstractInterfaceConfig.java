@@ -147,11 +147,6 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
         String wait = ConfigUtils.getProperty(Constants.SHUTDOWN_WAIT_KEY);
         if (wait != null && wait.trim().length() > 0) {
             System.setProperty(Constants.SHUTDOWN_WAIT_KEY, wait.trim());
-        } else {
-            wait = ConfigUtils.getProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY);
-            if (wait != null && wait.trim().length() > 0) {
-                System.setProperty(Constants.SHUTDOWN_WAIT_SECONDS_KEY, wait.trim());
-            }
         }
     }
     
@@ -317,38 +312,6 @@ public abstract class AbstractInterfaceConfig extends AbstractMethodConfig {
         }
     }
 
-    /**
-     * @deprecated Replace to <code>getStub()</code>
-     * @return local
-     */
-    @Deprecated
-    public String getLocal() {
-        return local;
-    }
-
-    /**
-     * @deprecated Replace to <code>setStub(String)</code>
-     * @param local
-     */
-    @Deprecated
-    public void setLocal(String local) {
-        checkName("local", local);
-        this.local = local;
-    }
-
-    /**
-     * @deprecated Replace to <code>setStub(Boolean)</code>
-     * @param local
-     */
-    @Deprecated
-    public void setLocal(Boolean local) {
-        if (local == null) {
-            setLocal((String) null);
-        } else {
-            setLocal(String.valueOf(local));
-        }
-    }
-    
     public String getStub() {
         return stub;
     }

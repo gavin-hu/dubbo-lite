@@ -16,13 +16,6 @@
 
 package com.alibaba.dubbo.rpc.protocol.dubbo;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.lang.reflect.Type;
-
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.serialize.Cleanable;
 import com.alibaba.dubbo.common.serialize.ObjectInput;
 import com.alibaba.dubbo.common.utils.Assert;
@@ -30,18 +23,25 @@ import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.Codec;
 import com.alibaba.dubbo.remoting.Decodeable;
+import com.alibaba.dubbo.remoting.buffer.ChannelBuffer;
+import com.alibaba.dubbo.remoting.buffer.ChannelBufferInputStream;
 import com.alibaba.dubbo.remoting.exchange.Response;
 import com.alibaba.dubbo.remoting.transport.CodecSupport;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.support.RpcUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.lang.reflect.Type;
+
 /**
  * @author <a href="mailto:gang.lvg@alibaba-inc.com">kimi</a>
  */
 public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable {
 
-    private static final Logger log = LoggerFactory.getLogger(DecodeableRpcResult.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DecodeableRpcResult.class);
 
     private Channel     channel;
 
@@ -116,8 +116,8 @@ public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable 
             try {
                 decode(channel, inputStream);
             } catch (Throwable e) {
-                if (log.isWarnEnabled()) {
-                    log.warn("Decode rpc result failed: " + e.getMessage(), e);
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Decode rpc result failed: " + e.getMessage(), e);
                 }
                 response.setStatus(Response.CLIENT_ERROR);
                 response.setErrorMessage(StringUtils.toString(e));
@@ -125,6 +125,17 @@ public class DecodeableRpcResult extends RpcResult implements Codec, Decodeable 
                 hasDecoded = true;
             }
         }
+    }
+
+    @Override
+    public void encode(Channel channel, ChannelBuffer buffer, Object message) throws IOException {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Object decode(Channel channel, ChannelBuffer buffer) throws IOException {
+        ChannelBufferInputStream input = new ChannelBufferInputStream(buffer);
+        return decode(channel, input);
     }
 
 }

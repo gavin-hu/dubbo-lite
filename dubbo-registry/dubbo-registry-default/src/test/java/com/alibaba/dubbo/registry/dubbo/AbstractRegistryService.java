@@ -15,6 +15,10 @@
  */
 package com.alibaba.dubbo.registry.dubbo;
 
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.registry.NotifyListener;
+import com.alibaba.dubbo.registry.RegistryService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,12 +26,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.registry.NotifyListener;
-import com.alibaba.dubbo.registry.RegistryService;
 
 /**
  * AbstractRegistryService
@@ -37,7 +35,7 @@ import com.alibaba.dubbo.registry.RegistryService;
 public abstract class AbstractRegistryService implements RegistryService {
 
     // 日志输出
-    protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass());
 
     // 已注册的服务
     // Map<serviceName, Map<url, queryString>>

@@ -36,7 +36,7 @@ public abstract class Mixin
 
 	private static final String PACKAGE_NAME = Mixin.class.getPackage().getName();
 
-	public static interface MixinAware{ void setMixinInstance(Object instance); }
+	public interface MixinAware{ void setMixinInstance(Object instance); }
 
 	/**
 	 * mixin interface and delegates.

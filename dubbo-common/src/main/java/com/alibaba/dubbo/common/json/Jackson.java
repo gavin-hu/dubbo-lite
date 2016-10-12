@@ -13,7 +13,7 @@ import java.util.TimeZone;
  * @author dylan
  */
 public class Jackson {
-    private static Logger logger = LoggerFactory.getLogger(Jackson.class);
+    private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Jackson.class);
     private static ObjectMapper objectMapper;
 
     private static JacksonObjectMapperProvider getJacksonProvider() {

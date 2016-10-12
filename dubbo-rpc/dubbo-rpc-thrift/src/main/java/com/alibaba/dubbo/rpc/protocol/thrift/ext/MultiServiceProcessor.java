@@ -13,8 +13,6 @@
  */
 package com.alibaba.dubbo.rpc.protocol.thrift.ext;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.rpc.protocol.thrift.ThriftCodec;
 import org.apache.thrift.TException;
 import org.apache.thrift.TProcessor;
@@ -32,7 +30,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class MultiServiceProcessor implements TProcessor {
 
-    private static final Logger logger = LoggerFactory.getLogger( MultiServiceProcessor.class );
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger( MultiServiceProcessor.class );
 
     private ConcurrentMap<String, TProcessor> processorMap = new ConcurrentHashMap<String, TProcessor>();
 

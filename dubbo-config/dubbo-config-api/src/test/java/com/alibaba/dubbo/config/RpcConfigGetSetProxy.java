@@ -18,10 +18,6 @@ package com.alibaba.dubbo.config;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.config.AbstractConfig;
-
 
 /**
  * @author haomin.liuhm
@@ -30,7 +26,7 @@ import com.alibaba.dubbo.config.AbstractConfig;
 public class RpcConfigGetSetProxy {
 
     private static final String RPC_CONFIG_BASECLASS = AbstractConfig.class.getName();
-    private static final Logger log = LoggerFactory.getLogger(RpcConfigGetSetProxy.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(RpcConfigGetSetProxy.class);
     
     
     private Object proxiee           = null;
@@ -111,13 +107,13 @@ public class RpcConfigGetSetProxy {
                 return m.invoke(proxiee, value);
             }
         } catch (IllegalArgumentException e) {
-            log.error("IllegalArgumentException", e);
+            logger.error("IllegalArgumentException", e);
             return null;
         } catch (IllegalAccessException e) {
-            log.error("IllegalAccessException", e);
+            logger.error("IllegalAccessException", e);
             return null;
         } catch (InvocationTargetException e) {
-            log.error("InvocationTargetException", e);
+            logger.error("InvocationTargetException", e);
             return null;
         }
     }
@@ -146,10 +142,10 @@ public class RpcConfigGetSetProxy {
                 return clazz.getMethod(methodName, value.getClass());
             }
         }catch (SecurityException e) {
-            log.error("SecurityException: " + e.getMessage());
+            logger.error("SecurityException: " + e.getMessage());
             return null;
         } catch (NoSuchMethodException e) {
-            log.error("NoSuchMethodException: " + e.getMessage());
+            logger.error("NoSuchMethodException: " + e.getMessage());
             return null;
         }
     }

@@ -15,14 +15,8 @@
  */
 package com.alibaba.dubbo.rpc.protocol.dubbo.filter;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.concurrent.Future;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.exchange.ResponseCallback;
 import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
 import com.alibaba.dubbo.rpc.Filter;
@@ -35,6 +29,10 @@ import com.alibaba.dubbo.rpc.StaticContext;
 import com.alibaba.dubbo.rpc.protocol.dubbo.FutureAdapter;
 import com.alibaba.dubbo.rpc.support.RpcUtils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.concurrent.Future;
+
 /**
  * EventFilter
  * @author chao.liuc
@@ -43,7 +41,7 @@ import com.alibaba.dubbo.rpc.support.RpcUtils;
 @Activate(group = Constants.CONSUMER)
 public class FutureFilter implements Filter {
 
-    protected static final Logger logger = LoggerFactory.getLogger(FutureFilter.class);
+    protected static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(FutureFilter.class);
 
     public Result invoke(final Invoker<?> invoker, final Invocation invocation) throws RpcException {
     	final boolean isAsync = RpcUtils.isAsync(invoker.getUrl(), invocation);
@@ -74,12 +72,12 @@ public class FutureFilter implements Filter {
             future.setCallback(new ResponseCallback() {
                 public void done(Object rpcResult) {
                     if (rpcResult == null){
-                        logger.error(new IllegalStateException("invalid result value : null, expected "+Result.class.getName()));
+                        logger.error("", new IllegalStateException("invalid result value : null, expected "+Result.class.getName()));
                         return;
                     }
                     ///must be rpcResult
                     if (! (rpcResult instanceof Result)){
-                        logger.error(new IllegalStateException("invalid result type :" + rpcResult.getClass() + ", expected "+Result.class.getName()));
+                        logger.error("", new IllegalStateException("invalid result type :" + rpcResult.getClass() + ", expected "+Result.class.getName()));
                         return;
                     }
                     Result result = (Result) rpcResult;

@@ -15,18 +15,17 @@
  */
 package com.alibaba.dubbo.rpc.protocol.dubbo;
 
-import java.net.InetSocketAddress;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.Parameters;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.RemotingException;
 import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
 import com.alibaba.dubbo.remoting.exchange.ExchangeHandler;
 import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
+
+import java.net.InetSocketAddress;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * dubbo protocol support class.
@@ -95,10 +94,6 @@ final class ReferenceCountExchangeClient implements ExchangeClient {
 
     public boolean hasAttribute(String key) {
         return client.hasAttribute(key);
-    }
-
-    public void reset(Parameters parameters) {
-        client.reset(parameters);
     }
 
     public void send(Object message) throws RemotingException {

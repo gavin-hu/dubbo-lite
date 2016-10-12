@@ -15,22 +15,6 @@
  */
 package com.alibaba.dubbo.config.spring;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import static org.junit.matchers.JUnitMatchers.containsString;
-
-import java.util.Collection;
-import java.util.List;
-
-import org.junit.Test;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanCreationException;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
@@ -54,7 +38,6 @@ import com.alibaba.dubbo.config.spring.impl.HelloServiceImpl;
 import com.alibaba.dubbo.config.spring.registry.MockRegistry;
 import com.alibaba.dubbo.config.spring.registry.MockRegistryFactory;
 import com.alibaba.dubbo.registry.Registry;
-import com.alibaba.dubbo.registry.RegistryFactory;
 import com.alibaba.dubbo.registry.RegistryService;
 import com.alibaba.dubbo.rpc.Exporter;
 import com.alibaba.dubbo.rpc.Filter;
@@ -62,8 +45,21 @@ import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.service.GenericException;
 import com.alibaba.dubbo.rpc.service.GenericService;
-
 import junit.framework.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Collection;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 
 /**
@@ -659,7 +655,7 @@ public class ConfigTest {
 
             ReferenceConfig<DemoService> reference = new ReferenceConfig<DemoService>();
             reference.setInterface(DemoService.class);
-            reference.setInjvm(true);
+            reference.setScope(Constants.SCOPE_LOCAL);
             reference.setRetries(2);
             reference.get();
             assertEquals(Integer.valueOf(5), reference.getRetries());

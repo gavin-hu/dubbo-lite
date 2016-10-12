@@ -16,12 +16,6 @@
 package com.alibaba.dubbo.config.url.test;
 
 
-import java.util.Arrays;
-
-import org.junit.Assert;
-
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.MethodConfig;
 import com.alibaba.dubbo.config.ProtocolConfig;
@@ -31,6 +25,9 @@ import com.alibaba.dubbo.config.RpcConfigGetSetProxy;
 import com.alibaba.dubbo.config.ServiceConfig;
 import com.alibaba.dubbo.config.api.DemoService;
 import com.alibaba.dubbo.config.provider.impl.DemoServiceImpl;
+import org.junit.Assert;
+
+import java.util.Arrays;
 
 /**
  * @author haomin.liuhm
@@ -40,7 +37,7 @@ import com.alibaba.dubbo.config.provider.impl.DemoServiceImpl;
 @SuppressWarnings("unused")
 public class UrlTestBase {
     
-    private static final Logger log = LoggerFactory.getLogger(UrlTestBase.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UrlTestBase.class);
 
     // ======================================================
     //   data column definition
@@ -91,7 +88,7 @@ public class UrlTestBase {
             };
     protected Object regConfForServiceTable[][] = {
     //            {"timeout", "registry.timeout", "int", 5000, 9000, "", "", "", "", ""}, 
-    //            {"file", "registry.file", "string", "", "regConfForServiceTable.log", "", "", "", "", ""}, 
+    //            {"file", "registry.file", "string", "", "regConfForServiceTable.logger", "", "", "", "", ""},
     //            {"wait", "registry.wait", "int", 0, 9000, "", "", "", "", ""}, 
     //            {"transport", "registry.transporter", "string", "netty", "mina", "", "", "", "", ""}, 
     //            {"subscribe", "subscribe", "boolean", true, false, "", "", "", "", ""}, 
@@ -172,8 +169,7 @@ public class UrlTestBase {
         servConf.setProvider(provConf);
         
         servConf.setRef(demoService);
-        servConf.setInterfaceClass(DemoService.class);
-       
+
         methodConfForService.setName("sayName");
         regConfForService.setAddress("127.0.0.1:9090");
         regConfForService.setProtocol("mockregistry");
@@ -194,17 +190,17 @@ public class UrlTestBase {
                                                  Object[][] dataTable, String configName, int column) {
         final String FAILLOG_HEADER = "The following config items are not found in URL: ";
         
-        log.warn("Verifying service url for " + configName + "... ");
-        log.warn("Consumer url string: " + paramStringFromDb);
+        logger.warn("Verifying service url for " + configName + "... ");
+        logger.warn("Consumer url string: " + paramStringFromDb);
         
         String failLog = FAILLOG_HEADER;
         for(Object[] row : dataTable){
             
             String targetString = genParamString(row[URL_KEY], row[column]);
             
-            log.warn("Checking " + (String)row[KEY] + "for" + targetString);
+            logger.warn("Checking " + (String)row[KEY] + "for" + targetString);
             if (paramStringFromDb.contains(targetString)){
-                log.warn((String)row[KEY] + " --> " + targetString + " OK!");
+                logger.warn((String)row[KEY] + " --> " + targetString + " OK!");
             } else {
                 failLog += targetString + ", ";
             }

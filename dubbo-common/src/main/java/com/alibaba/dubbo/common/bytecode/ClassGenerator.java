@@ -49,7 +49,7 @@ import com.alibaba.dubbo.common.utils.ReflectUtils;
 
 public final class ClassGenerator
 {
-	public static interface DC{} // dynamic class tag interface.
+	public interface DC{} // dynamic class tag interface.
 
 	private static final AtomicLong CLASS_NAME_COUNTER = new AtomicLong(0);
 

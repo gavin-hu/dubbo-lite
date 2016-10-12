@@ -16,23 +16,21 @@
 
 package com.alibaba.dubbo.remoting.transport;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.serialize.Serialization;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:gang.lvg@alibaba-inc.com">kimi</a>
  */
 public class CodecSupport {
 
-    private static final Logger logger = LoggerFactory.getLogger(CodecSupport.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CodecSupport.class);
 
     private CodecSupport() {
     }

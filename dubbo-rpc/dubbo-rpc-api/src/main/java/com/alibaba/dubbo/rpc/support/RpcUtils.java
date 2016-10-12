@@ -15,17 +15,15 @@
  */
 package com.alibaba.dubbo.rpc.support;
 
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
-import java.util.concurrent.atomic.AtomicLong;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ReflectUtils;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.RpcInvocation;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * RpcUtils
@@ -35,7 +33,7 @@ import com.alibaba.dubbo.rpc.RpcInvocation;
  */
 public class RpcUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(RpcUtils.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(RpcUtils.class);
 
     public static Class<?> getReturnType(Invocation invocation) {
         try {

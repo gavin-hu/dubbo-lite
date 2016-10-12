@@ -16,8 +16,6 @@
 
 package com.alibaba.dubbo.remoting.transport;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.Decodeable;
@@ -30,7 +28,7 @@ import com.alibaba.dubbo.remoting.exchange.Response;
  */
 public class DecodeHandler extends AbstractChannelHandlerDelegate {
 
-    private static final Logger log = LoggerFactory.getLogger(DecodeHandler.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DecodeHandler.class);
 
     public DecodeHandler(ChannelHandler handler) {
         super(handler);
@@ -56,13 +54,13 @@ public class DecodeHandler extends AbstractChannelHandlerDelegate {
         if (message != null && message instanceof Decodeable) {
             try {
                 ((Decodeable)message).decode();
-                if (log.isDebugEnabled()) {
-                    log.debug(new StringBuilder(32).append("Decode decodeable message ")
+                if (logger.isDebugEnabled()) {
+                    logger.debug(new StringBuilder(32).append("Decode decodeable message ")
                                   .append(message.getClass().getName()).toString());
                 }
             } catch (Throwable e) {
-                if (log.isWarnEnabled()) {
-                    log.warn(
+                if (logger.isWarnEnabled()) {
+                    logger.warn(
                         new StringBuilder(32)
                             .append("Call Decodeable.decode failed: ")
                             .append(e.getMessage()).toString(),

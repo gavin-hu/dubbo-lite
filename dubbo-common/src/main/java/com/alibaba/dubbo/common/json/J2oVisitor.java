@@ -24,11 +24,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import com.alibaba.dubbo.common.bytecode.Wrapper;
-import com.alibaba.dubbo.common.utils.Stack;
 import com.alibaba.dubbo.common.utils.StringUtils;
 
 /**

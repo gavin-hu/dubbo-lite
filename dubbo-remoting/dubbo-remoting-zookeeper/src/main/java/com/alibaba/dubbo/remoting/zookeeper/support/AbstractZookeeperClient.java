@@ -1,21 +1,19 @@
 package com.alibaba.dubbo.remoting.zookeeper.support;
 
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.remoting.zookeeper.ChildListener;
+import com.alibaba.dubbo.remoting.zookeeper.StateListener;
+import com.alibaba.dubbo.remoting.zookeeper.ZookeeperClient;
+
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.remoting.zookeeper.ChildListener;
-import com.alibaba.dubbo.remoting.zookeeper.StateListener;
-import com.alibaba.dubbo.remoting.zookeeper.ZookeeperClient;
-
 public abstract class AbstractZookeeperClient<TargetChildListener> implements ZookeeperClient {
 
-	protected static final Logger logger = LoggerFactory.getLogger(AbstractZookeeperClient.class);
+	protected static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractZookeeperClient.class);
 
 	private final URL url;
 

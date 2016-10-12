@@ -15,6 +15,15 @@
  */
 package com.alibaba.dubbo.remoting.exchange.support;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.remoting.Channel;
+import com.alibaba.dubbo.remoting.RemotingException;
+import com.alibaba.dubbo.remoting.TimeoutException;
+import com.alibaba.dubbo.remoting.exchange.Request;
+import com.alibaba.dubbo.remoting.exchange.Response;
+import com.alibaba.dubbo.remoting.exchange.ResponseCallback;
+import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -24,17 +33,6 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.remoting.Channel;
-import com.alibaba.dubbo.remoting.RemotingException;
-import com.alibaba.dubbo.remoting.TimeoutException;
-import com.alibaba.dubbo.remoting.exchange.Request;
-import com.alibaba.dubbo.remoting.exchange.Response;
-import com.alibaba.dubbo.remoting.exchange.ResponseCallback;
-import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
-
 /**
  * DefaultFuture.
  * 
@@ -43,7 +41,7 @@ import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
  */
 public class DefaultFuture implements ResponseFuture {
 
-    private static final Logger                   logger = LoggerFactory.getLogger(DefaultFuture.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DefaultFuture.class);
 
     private static final Map<Long, Channel>       CHANNELS   = new ConcurrentHashMap<Long, Channel>();
 

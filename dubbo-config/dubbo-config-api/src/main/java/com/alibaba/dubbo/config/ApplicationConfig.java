@@ -15,13 +15,12 @@
  */
 package com.alibaba.dubbo.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.compiler.support.AdaptiveCompiler;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.support.Parameter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -183,7 +182,6 @@ public class ApplicationConfig extends AbstractConfig {
 
     public void setLogger(String logger) {
         this.logger = logger;
-        LoggerFactory.setLoggerAdapter(logger);
     }
 
     public Boolean isDefault() {

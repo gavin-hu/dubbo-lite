@@ -15,12 +15,8 @@
  */
 package com.alibaba.dubbo.rpc.filter;
 
-import java.lang.reflect.Method;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ReflectUtils;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.rpc.Filter;
@@ -31,6 +27,8 @@ import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcResult;
 import com.alibaba.dubbo.rpc.service.GenericService;
+
+import java.lang.reflect.Method;
 
 /**
  * ExceptionInvokerFilter
@@ -49,13 +47,13 @@ import com.alibaba.dubbo.rpc.service.GenericService;
 @Activate(group = Constants.PROVIDER)
 public class ExceptionFilter implements Filter {
 
-    private final Logger logger;
+    private final org.slf4j.Logger logger;
     
     public ExceptionFilter() {
-        this(LoggerFactory.getLogger(ExceptionFilter.class));
+        this(org.slf4j.LoggerFactory.getLogger(ExceptionFilter.class));
     }
     
-    public ExceptionFilter(Logger logger) {
+    public ExceptionFilter(org.slf4j.Logger logger) {
         this.logger = logger;
     }
     

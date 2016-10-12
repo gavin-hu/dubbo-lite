@@ -15,14 +15,12 @@
  */
 package com.alibaba.dubbo.common.extensionloader.compatible.impl;
 
-import com.alibaba.dubbo.common.Extension;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extensionloader.compatible.CompatibleExt;
 
 /**
  * @author ding.lid
  */
-@Extension("impl1")
 public class CompatibleExtImpl1 implements CompatibleExt {
     public String echo(URL url, String s) {
         return "Ext1Impl1-echo";

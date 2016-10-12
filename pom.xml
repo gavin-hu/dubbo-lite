@@ -16,15 +16,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!--<parent> <groupId>com.alibaba</groupId> <artifactId>opensesame</artifactId>
-		<version>2.0</version> </parent> -->
 	<groupId>com.alibaba</groupId>
-	<artifactId>dubbo-parent</artifactId>
-	<version>2.8.4</version>
+	<artifactId>dubbo-lite</artifactId>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>The parent project of dubbo</description>
-	<url>http://code.alibabatech.com/wiki/display/dubbo</url>
+	<url>https://github.com/OpenTopsTech/dubbo-lite</url>
 	<inceptionYear>2011</inceptionYear>
 	<licenses>
 		<license>
@@ -40,96 +38,43 @@
 	</organization>
 	<modules>
 		<module>dubbo-common</module>
-		<module>dubbo-container</module>
 		<module>dubbo-remoting</module>
 		<module>dubbo-rpc</module>
-		<module>dubbo-filter</module>
 		<module>dubbo-cluster</module>
 		<module>dubbo-registry</module>
 		<module>dubbo-monitor</module>
 		<module>dubbo-config</module>
-		<module>dubbo</module>
-		<module>dubbo-simple</module>
-		<module>dubbo-admin</module>
-		<module>dubbo-demo</module>
-		<module>hessian-lite</module>
-        <!--<module>dubbo-tool/dubbo-demo-lite-archetype</module>-->
+		<module>dubbo-boot</module>
 	</modules>
-	<profiles>
-		<profile>
-			<id>test</id>
-			<activation>
-				<file>
-					<missing>.project</missing>
-				</file>
-			</activation>
-			<modules>
-				<module>dubbo-test</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>hudson</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-surefire-plugin</artifactId>
-						<configuration>
-							<testFailureIgnore>true</testFailureIgnore>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+
 	<properties>
+		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
 		<!-- Common libs -->
-		<spring.bom.version>3.2.9.RELEASE</spring.bom.version>
-		<javassist_version>3.20.0-GA</javassist_version>
-		<netty_version>3.7.0.Final</netty_version>
-		<mina_version>1.1.7</mina_version>
-		<grizzly_version>2.1.4</grizzly_version>
-		<httpclient_version>4.2.1</httpclient_version>
-		<hessian_lite_version>3.2.1-fixed-2</hessian_lite_version>
-		<xstream_version>1.4.1</xstream_version>
-		<fastjson_version>1.1.39</fastjson_version>
-		<bsf_version>3.1</bsf_version>
-		<sorcerer_version>0.8</sorcerer_version>
-		<zookeeper_version>3.4.6</zookeeper_version>
-		<zkclient_version>0.1</zkclient_version>
-		<curator_version>2.5.0</curator_version>
-		<jedis_version>2.1.0</jedis_version>
-		<xmemcached_version>1.3.6</xmemcached_version>
-		<cxf_version>2.6.1</cxf_version>
-		<thrift_version>0.8.0</thrift_version>
-		<jfreechart_version>1.0.13</jfreechart_version>
-		<hessian_version>4.0.7</hessian_version>
-		<servlet_version>3.1.0</servlet_version>
-		<jetty_version>6.1.26</jetty_version>
-		<validation_version>1.0.0.GA</validation_version>
-		<hibernate_validator_version>4.2.0.Final</hibernate_validator_version>
-		<jcache_version>0.4</jcache_version>
-		<sca_version>2.0-M5.1</sca_version>
-		<guice_version>3.0</guice_version>
-		<cglib_version>2.2</cglib_version>
-		<webx_version>3.0.8</webx_version>
-        <jackson_version>2.3.3</jackson_version>
-        <commons_pool_version>1.6</commons_pool_version>
-        <tomcat_embed_version>8.0.11</tomcat_embed_version>
+		<javassist.version>3.20.0-GA</javassist.version>
+		<netty.version>3.10.6.Final</netty.version>
+		<grizzly.version>2.3.28</grizzly.version>
+		<fastjson.version>1.1.39</fastjson.version>
+		<bsf.version>3.1</bsf.version>
+		<sorcerer.version>0.8</sorcerer.version>
+		<zookeeper.version>3.4.6</zookeeper.version>
+		<curator.version>2.5.0</curator.version>
+		<jedis.version>2.1.0</jedis.version>
+		<xmemcached.version>1.3.6</xmemcached.version>
+		<cxf.version>2.6.1</cxf.version>
+		<thrift.version>0.8.0</thrift.version>
+		<jfreechart.version>1.0.13</jfreechart.version>
+		<hessian.version>4.0.38</hessian.version>
+		<servlet.version>3.1.0</servlet.version>
+		<cglib.version>2.2</cglib.version>
+        <jackson.version>2.3.3</jackson.version>
+        <commons.pool.version>1.6</commons.pool.version>
+        <tomcat.embed.version>8.0.11</tomcat.embed.version>
 		<!-- Log libs -->
-		<slf4j_version>1.6.2</slf4j_version>
-		<jcl_version>1.1</jcl_version>
-		<log4j_version>1.2.16</log4j_version>
-		<logback_version>1.0.6</logback_version>
+		<slf4j.version>1.6.6</slf4j.version>
 		<!-- Test libs -->
-		<junit_version>4.10</junit_version>
-		<easymock_version>3.0</easymock_version>
-		<jmockit_version>0.999.8</jmockit_version>
-		<!-- Build args -->
-		<!--<argline>-server -Xms64m -Xmx64m -XX:PermSize=64m -XX:MaxPermSize=64m</argline> -->
-		<skip_maven_deploy>false</skip_maven_deploy>
-		<updateReleaseInfo>true</updateReleaseInfo>
-		<project.build.sourceEncoding>${file_encoding}</project.build.sourceEncoding>
+		<junit.version>4.10</junit.version>
+		<easymock.version>3.0</easymock.version>
+		<jmockit.version>0.999.8</jmockit.version>
 
 		<!-- generate idea copyright -->
 		<copyright>Copyright 1999-2012 Alibaba Group.&#10; &#10;Licensed under
@@ -144,250 +89,155 @@
 			governing permissions and&#10;limitations under the License.</copyright>
 		<profile.name>oss</profile.name>
 
-		<!-- for maven compiler plugin -->
-		<maven_compiler_plugin_version>2.3.2</maven_compiler_plugin_version>
-		<java_source_version>1.6</java_source_version>
-		<java_target_version>1.6</java_target_version>
-		<file_encoding>UTF-8</file_encoding>
-
-		<maven_source_plugin_version>2.1.1</maven_source_plugin_version>
-		<maven_jar_plugin_version>2.3.2</maven_jar_plugin_version>
-		<maven_war_plugin_version>2.1.1</maven_war_plugin_version>
-		<maven_install_plugin_version>2.3.1</maven_install_plugin_version>
-		<maven_deploy_plugin_version>2.7</maven_deploy_plugin_version>
-
-        <maven-surefire-plugin_version>2.17</maven-surefire-plugin_version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
-			<!-- Common libs -->
 			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<version>${spring.bom.version}</version>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<!-- Common libs -->
 			<dependency>
 				<groupId>org.javassist</groupId>
 				<artifactId>javassist</artifactId>
-				<version>${javassist_version}</version>
+				<version>${javassist.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>io.netty</groupId>
 				<artifactId>netty</artifactId>
-				<version>${netty_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.mina</groupId>
-				<artifactId>mina-core</artifactId>
-				<version>${mina_version}</version>
+				<version>${netty.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.glassfish.grizzly</groupId>
-				<artifactId>grizzly-core</artifactId>
-				<version>${grizzly_version}</version>
+				<artifactId>grizzly-framework</artifactId>
+				<version>${grizzly.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-				<version>${httpclient_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>hessian-lite</artifactId>
-				<version>${hessian_lite_version}</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
-				<version>${fastjson_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.thoughtworks.xstream</groupId>
-				<artifactId>xstream</artifactId>
-				<version>${xstream_version}</version>
+				<version>${fastjson.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.bsf</groupId>
 				<artifactId>bsf-api</artifactId>
-				<version>${bsf_version}</version>
+				<version>${bsf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jvnet.sorcerer</groupId>
 				<artifactId>sorcerer-javac</artifactId>
-				<version>${sorcerer_version}</version>
+				<version>${sorcerer.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.zookeeper</groupId>
 				<artifactId>zookeeper</artifactId>
-				<version>${zookeeper_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.sgroschupf</groupId>
-				<artifactId>zkclient</artifactId>
-				<version>${zkclient_version}</version>
+				<version>${zookeeper.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.curator</groupId>
 				<artifactId>curator-framework</artifactId>
-				<version>${curator_version}</version>
+				<version>${curator.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
-				<version>${jedis_version}</version>
+				<version>${jedis.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.googlecode.xmemcached</groupId>
 				<artifactId>xmemcached</artifactId>
-				<version>${xmemcached_version}</version>
+				<version>${xmemcached.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-simple</artifactId>
-				<version>${cxf_version}</version>
+				<version>${cxf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-transports-http</artifactId>
-				<version>${cxf_version}</version>
+				<version>${cxf.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.thrift</groupId>
 				<artifactId>libthrift</artifactId>
-				<version>${thrift_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>jfree</groupId>
-				<artifactId>jfreechart</artifactId>
-				<version>${jfreechart_version}</version>
+				<version>${thrift.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.caucho</groupId>
 				<artifactId>hessian</artifactId>
-				<version>${hessian_version}</version>
+				<version>${hessian.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
-				<version>${servlet_version}</version>
+				<version>${servlet.version}</version>
+				<scope>provided</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty</artifactId>
-				<version>${jetty_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${validation_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>${hibernate_validator_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.cache</groupId>
-				<artifactId>cache-api</artifactId>
-				<version>${jcache_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.tuscany.sca</groupId>
-				<artifactId>tuscany-sca-api</artifactId>
-				<version>${sca_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.inject</groupId>
-				<artifactId>guice</artifactId>
-				<version>${guice_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.alibaba.citrus</groupId>
-				<artifactId>citrus-webx-all</artifactId>
-				<version>${webx_version}</version>
-			</dependency>
-             <dependency>
-                 <groupId>com.fasterxml.jackson.core</groupId>
-                 <artifactId>jackson-core</artifactId>
-                 <version>${jackson_version}</version>
-             </dependency>
              <dependency>
                   <groupId>com.fasterxml.jackson.core</groupId>
                   <artifactId>jackson-databind</artifactId>
-                  <version>${jackson_version}</version>
+                  <version>${jackson.version}</version>
               </dependency>
 			<!-- Log libs -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j_version}</version>
+				<version>${slf4j.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging-api</artifactId>
-				<version>${jcl_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>${log4j_version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback_version}</version>
-			</dependency>
+
 			<!-- Test libs -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
-				<version>${junit_version}</version>
+				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymock</artifactId>
-				<version>${easymock_version}</version>
+				<version>${easymock.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.googlecode.jmockit</groupId>
 				<artifactId>jmockit</artifactId>
-				<version>${jmockit_version}</version>
+				<version>${jmockit.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.easymock</groupId>
 				<artifactId>easymockclassextension</artifactId>
-				<version>${easymock_version}</version>
+				<version>${easymock.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>cglib</groupId>
 				<artifactId>cglib-nodep</artifactId>
-				<version>${cglib_version}</version>
+				<version>${cglib.version}</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>commons-pool</groupId>
 				<artifactId>commons-pool</artifactId>
-				<version>${commons_pool_version}</version>
+				<version>${commons.pool.version}</version>
 			</dependency>
             <dependency>
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat_embed_version}</version>
+                <version>${tomcat.embed.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-logging-juli</artifactId>
-                <version>${tomcat_embed_version}</version>
+                <version>${tomcat.embed.version}</version>
             </dependency>
 
             <!-- TODO move versions into properties -->
@@ -465,19 +315,6 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>true</addMavenDescriptor>
-						<index>true</index>
-						<manifest>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
 					<execution>
@@ -489,84 +326,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin_version}</version>
-				<configuration>
-					<useSystemClassLoader>true</useSystemClassLoader>
-					<forkMode>once</forkMode>
-					<argLine>${argline}</argLine>
-					<systemProperties>
-						<!-- common shared -->
-						<property>
-							<name>transporter</name>
-							<value>${transporter}</value>
-						</property>
-						<property>
-							<name>serialization</name>
-							<value>${serialization}</value>
-						</property>
-						<!-- server side -->
-						<property>
-							<name>port</name>
-							<value>${port}</value>
-						</property>
-						<property>
-							<name>threadpool</name>
-							<value>${threadpool}</value>
-						</property>
-						<property>
-							<name>threads</name>
-							<value>${threads}</value>
-						</property>
-						<property>
-							<name>iothreads</name>
-							<value>${iothreads}</value>
-						</property>
-						<!-- client side -->
-						<property>
-							<name>server</name>
-							<value>${server}</value>
-						</property>
-						<property>
-							<name>timeout</name>
-							<value>${timeout}</value>
-						</property>
-						<property>
-							<name>length</name>
-							<value>${length}</value>
-						</property>
-						<property>
-							<name>connections</name>
-							<value>${connections}</value>
-						</property>
-						<property>
-							<name>base</name>
-							<value>${base}</value>
-						</property>
-						<property>
-							<name>concurrent</name>
-							<value>${concurrent}</value>
-						</property>
-						<property>
-							<name>runs</name>
-							<value>${runs}</value>
-						</property>
-						<property>
-							<name>onerror</name>
-							<value>${onerror}</value>
-						</property>
-					</systemProperties>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<configuration>
-					<skip>${skip_maven_deploy}</skip>
-				</configuration>
-			</plugin>
 		</plugins>
 
 		<pluginManagement>
@@ -574,92 +333,44 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>${maven_jar_plugin_version}</version>
+					<version>3.0.2</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>${maven_war_plugin_version}</version>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>2.4</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-install-plugin</artifactId>
-					<version>${maven_install_plugin_version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-deploy-plugin</artifactId>
-					<version>${maven_deploy_plugin_version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven_compiler_plugin_version}</version>
-					<configuration>
-                        <fork>true</fork>
-						<source>${java_source_version}</source>
-						<target>${java_target_version}</target>
-						<encoding>${file_encoding}</encoding>
-                        <compilerArgs>
-                            <arg>-XX:MaxPermSize=512M</arg>
-                        </compilerArgs>
-					</configuration>
-				</plugin>
-				<!--This plugin's configuration is used to store Eclipse m2e settings
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-dependency-plugin
-										</artifactId>
-										<versionRange>
-											[2.1,)
-										</versionRange>
-										<goals>
-											<goal>unpack</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>2.10.3</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-
 	</build>
 
 	<issueManagement>
-		<system>jira</system>
-		<url>http://code.alibabatech.com/jira/browse/DUBBO</url>
+		<system>GitHub Issues</system>
+		<url>https://github.com/OpenTopsTech/dubbo-lite/issues</url>
 	</issueManagement>
 	<scm>
 		<url>http://code.alibabatech.com/svn/dubbo/trunk</url>
-		<connection>scm:svn:http://code.alibabatech.com/svn/dubbo/trunk</connection>
+		<connection>scm:git:git@github.com:OpenTopsTech/dubbo-lite.git</connection>
+		<developerConnection>scm:git:git@github.com:OpenTopsTech/dubbo-lite.git</developerConnection>
 	</scm>
-	<mailingLists>
-		<mailingList>
-			<name>Dubbo User Mailling List</name>
-			<subscribe>dubbo-subscribe AT googlegroups DOT com</subscribe>
-			<unsubscribe>dubbo-unsubscribe AT googlegroups DOT com</unsubscribe>
-			<post>dubbo AT googlegroups DOT com</post>
-			<archive>http://groups.google.com/group/dubbo</archive>
-		</mailingList>
-	</mailingLists>
 	<developers>
+		<!-- Tops Tech -->
+		<developer>
+			<id>gavin-hu</id>
+			<name>Gavin Hu</name>
+			<email>huhz1986@gmail.com</email>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+
+		<!-- Alibaba -->
 		<developer>
 			<name>QianXiao(Shawn)</name>
 			<id>shawn.qianx</id>

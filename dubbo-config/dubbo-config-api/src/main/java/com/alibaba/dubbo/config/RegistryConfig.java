@@ -15,11 +15,11 @@
  */
 package com.alibaba.dubbo.config;
 
-import java.util.Map;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.config.support.Parameter;
 import com.alibaba.dubbo.registry.support.AbstractRegistryFactory;
+
+import java.util.Map;
 
 /**
  * RegistryConfig
@@ -142,28 +142,6 @@ public class RegistryConfig extends AbstractConfig {
         this.password = password;
     }
 
-    /**
-     * @deprecated
-     * @see com.alibaba.dubbo.config.ProviderConfig#getWait()
-     * @return wait
-     */
-    @Deprecated
-    public Integer getWait() {
-        return wait;
-    }
-
-    /**
-     * @deprecated
-     * @see com.alibaba.dubbo.config.ProviderConfig#setWait(Integer)
-     * @param wait
-     */
-    @Deprecated
-    public void setWait(Integer wait) {
-        this.wait = wait;
-        if( wait!=null && wait>0)
-            System.setProperty(Constants.SHUTDOWN_WAIT_KEY, String.valueOf(wait));
-    }
-    
     public Boolean isCheck() {
 		return check;
 	}
@@ -179,31 +157,6 @@ public class RegistryConfig extends AbstractConfig {
     public void setFile(String file) {
         checkPathLength("file", file);
         this.file = file;
-    }
-
-    /**
-     * @deprecated
-     * @see #getTransporter()
-     * @return transport
-     */
-    @Deprecated
-    @Parameter(excluded = true)
-    public String getTransport() {
-        return getTransporter();
-    }
-    
-    /**
-     * @deprecated
-     * @see #setTransporter(String)
-     * @param transport
-     */
-    @Deprecated
-    public void setTransport(String transport) {
-        setTransporter(transport);
-    }
-    
-    public String getTransporter() {
-        return transporter;
     }
 
     public void setTransporter(String transporter) {
@@ -321,11 +274,6 @@ public class RegistryConfig extends AbstractConfig {
 
     public static void destroyAll() {
         AbstractRegistryFactory.destroyAll();
-    }
-
-    @Deprecated
-    public static void closeAll() {
-        destroyAll();
     }
 
 }

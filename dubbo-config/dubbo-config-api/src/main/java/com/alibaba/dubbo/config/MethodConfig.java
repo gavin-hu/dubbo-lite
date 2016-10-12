@@ -87,35 +87,6 @@ public class MethodConfig extends AbstractMethodConfig {
         }
     }
     
-    public Integer getStat() {
-        return stat;
-    }
-    
-    @Deprecated
-    public void setStat(Integer stat) {
-        this.stat = stat;
-    }
-
-    @Deprecated
-    public Boolean isRetry() {
-        return retry;
-    }
-
-    @Deprecated
-    public void setRetry(Boolean retry) {
-        this.retry = retry;
-    }
-
-    @Deprecated
-    public Boolean isReliable() {
-        return reliable;
-    }
-
-    @Deprecated
-    public void setReliable(Boolean reliable) {
-        this.reliable = reliable;
-    }
-
     public Integer getExecutes() {
         return executes;
     }

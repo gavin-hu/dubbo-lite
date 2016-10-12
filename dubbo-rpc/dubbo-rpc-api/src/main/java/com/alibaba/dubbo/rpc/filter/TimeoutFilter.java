@@ -15,17 +15,15 @@
  */
 package com.alibaba.dubbo.rpc.filter;
 
-import java.util.Arrays;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.rpc.Filter;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcException;
+
+import java.util.Arrays;
 
 /**
  * 如果执行timeout，则log记录下，不干涉服务的运行
@@ -35,7 +33,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 @Activate(group = Constants.PROVIDER)
 public class TimeoutFilter implements Filter {
 
-    private static final Logger logger = LoggerFactory.getLogger(TimeoutFilter.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(TimeoutFilter.class);
 
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         long start = System.currentTimeMillis();

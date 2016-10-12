@@ -57,11 +57,6 @@ public class ExchangeServerDelegate implements ExchangeServer {
         server.reset(url);
     }
 
-    @Deprecated
-    public void reset(com.alibaba.dubbo.common.Parameters parameters){
-        reset(getUrl().addParameters(parameters.getParameters()));
-    }
-    
     public Collection<Channel> getChannels() {
         return server.getChannels();
     }

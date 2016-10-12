@@ -15,19 +15,17 @@
  */
 package com.alibaba.dubbo.registry.support;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.registry.Registry;
+import com.alibaba.dubbo.registry.RegistryFactory;
+import com.alibaba.dubbo.registry.RegistryService;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
-
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.registry.Registry;
-import com.alibaba.dubbo.registry.RegistryFactory;
-import com.alibaba.dubbo.registry.RegistryService;
 
 /**
  * AbstractRegistryFactory. (SPI, Singleton, ThreadSafe)
@@ -38,7 +36,7 @@ import com.alibaba.dubbo.registry.RegistryService;
 public abstract class AbstractRegistryFactory implements RegistryFactory {
 
     // 日志输出
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractRegistryFactory.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractRegistryFactory.class);
 
     // 注册中心获取过程锁
     private static final ReentrantLock LOCK = new ReentrantLock();
@@ -59,8 +57,8 @@ public abstract class AbstractRegistryFactory implements RegistryFactory {
      * 关闭所有已创建注册中心
      */
     public static void destroyAll() {
-        if (LOGGER.isInfoEnabled()) {
-            LOGGER.info("Close all registries " + getRegistries());
+        if (logger.isInfoEnabled()) {
+            logger.info("Close all registries " + getRegistries());
         }
         // 锁定注册中心关闭过程
         LOCK.lock();
@@ -69,7 +67,7 @@ public abstract class AbstractRegistryFactory implements RegistryFactory {
                 try {
                     registry.destroy();
                 } catch (Throwable e) {
-                    LOGGER.error(e.getMessage(), e);
+                    logger.error(e.getMessage(), e);
                 }
             }
             REGISTRIES.clear();

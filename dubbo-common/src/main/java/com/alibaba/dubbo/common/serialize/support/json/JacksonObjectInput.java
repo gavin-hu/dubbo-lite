@@ -33,7 +33,7 @@ import java.util.Map;
  * @author dylan
  */
 public class JacksonObjectInput implements ObjectInput {
-    private static Logger logger = LoggerFactory.getLogger(JacksonObjectInput.class);
+    private static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(JacksonObjectInput.class);
 
     private final ObjectMapper objectMapper;
     //    private final BufferedReader reader;

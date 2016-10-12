@@ -112,21 +112,11 @@ public class ProviderConfig extends AbstractServiceConfig {
     // 是否为缺省
     private Boolean             isDefault;
     
-    @Deprecated
-    public void setProtocol(String protocol) {
-        this.protocols = Arrays.asList(new ProtocolConfig[] {new ProtocolConfig(protocol)});
-    }
-
     @Parameter(excluded = true)
     public Boolean isDefault() {
         return isDefault;
     }
 
-    @Deprecated
-    public void setDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-    
     @Parameter(excluded = true)
     public String getHost() {
         return host;
@@ -141,22 +131,6 @@ public class ProviderConfig extends AbstractServiceConfig {
         return port;
     }
     
-    @Deprecated
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    @Deprecated
-    @Parameter(excluded = true)
-    public String getPath() {
-        return getContextpath();
-    }
-
-    @Deprecated
-    public void setPath(String path) {
-        setContextpath(path);
-    }
-
     @Parameter(excluded = true)
     public String getContextpath() {
         return contextpath;
@@ -342,25 +316,6 @@ public class ProviderConfig extends AbstractServiceConfig {
     public void setExchanger(String exchanger) {
         checkExtension(Exchanger.class, "exchanger", exchanger);
         this.exchanger = exchanger;
-    }
-
-    /**
-     * 单词拼写错误，请使用{@link #getDispatcher()}
-     * @deprecated {@link #getDispatcher()}
-     */
-    @Deprecated
-    @Parameter(excluded = true)
-    public String getDispather() {
-        return getDispatcher();
-    }
-
-    /**
-     * 单词拼写错误，请使用{@link #setDispatcher(String)}
-     * @deprecated {@link #setDispatcher(String)}
-     */
-    @Deprecated
-    public void setDispather(String dispather) {
-        setDispatcher(dispather);
     }
 
     public String getDispatcher() {

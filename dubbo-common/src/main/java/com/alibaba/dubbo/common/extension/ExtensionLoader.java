@@ -15,6 +15,14 @@
  */
 package com.alibaba.dubbo.common.extension;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.support.ActivateComparator;
+import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
+import com.alibaba.dubbo.common.utils.ConfigUtils;
+import com.alibaba.dubbo.common.utils.Holder;
+import com.alibaba.dubbo.common.utils.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
@@ -31,16 +39,6 @@ import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
-
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.extension.support.ActivateComparator;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
-import com.alibaba.dubbo.common.utils.ConfigUtils;
-import com.alibaba.dubbo.common.utils.Holder;
-import com.alibaba.dubbo.common.utils.StringUtils;
 
 /**
  * Dubbo使用的扩展点获取。<p>
@@ -61,7 +59,7 @@ import com.alibaba.dubbo.common.utils.StringUtils;
  */
 public class ExtensionLoader<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ExtensionLoader.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ExtensionLoader.class);
     
     private static final String SERVICES_DIRECTORY = "META-INF/services/";
 
@@ -399,50 +397,6 @@ public class ExtensionLoader<T> {
         }
     }
 
-    /**
-     * 编程方式添加替换已有扩展点。
-     *
-     * @param name 扩展点名
-     * @param clazz 扩展点类
-     * @throws IllegalStateException 要添加扩展点名已经存在。
-     * @deprecated 不推荐应用使用，一般只在测试时可以使用
-     */
-    @Deprecated
-    public void replaceExtension(String name, Class<?> clazz) {
-        getExtensionClasses(); // load classes
-
-        if(!type.isAssignableFrom(clazz)) {
-            throw new IllegalStateException("Input type " +
-                    clazz + "not implement Extension " + type);
-        }
-        if(clazz.isInterface()) {
-            throw new IllegalStateException("Input type " +
-                    clazz + "can not be interface!");
-        }
-
-        if(!clazz.isAnnotationPresent(Adaptive.class)) {
-            if(StringUtils.isBlank(name)) {
-                throw new IllegalStateException("Extension name is blank (Extension " + type + ")!");
-            }
-            if(!cachedClasses.get().containsKey(name)) {
-                throw new IllegalStateException("Extension name " +
-                        name + " not existed(Extension " + type + ")!");
-            }
-
-            cachedNames.put(clazz, name);
-            cachedClasses.get().put(name, clazz);
-            cachedInstances.remove(name);
-        }
-        else {
-            if(cachedAdaptiveClass == null) {
-                throw new IllegalStateException("Adaptive Extension not existed(Extension " + type + ")!");
-            }
-
-            cachedAdaptiveClass = clazz;
-            cachedAdaptiveInstance.set(null);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public T getAdaptiveExtension() {
         Object instance = cachedAdaptiveInstance.get();
@@ -702,17 +656,12 @@ public class ExtensionLoader<T> {
         }
     }
     
-    @SuppressWarnings("deprecation")
     private String findAnnotationName(Class<?> clazz) {
-        com.alibaba.dubbo.common.Extension extension = clazz.getAnnotation(com.alibaba.dubbo.common.Extension.class);
-        if (extension == null) {
-            String name = clazz.getSimpleName();
-            if (name.endsWith(type.getSimpleName())) {
-                name = name.substring(0, name.length() - type.getSimpleName().length());
-            }
-            return name.toLowerCase();
+        String name = clazz.getSimpleName();
+        if (name.endsWith(type.getSimpleName())) {
+            name = name.substring(0, name.length() - type.getSimpleName().length());
         }
-        return extension.value();
+        return name.toLowerCase();
     }
     
     @SuppressWarnings("unchecked")

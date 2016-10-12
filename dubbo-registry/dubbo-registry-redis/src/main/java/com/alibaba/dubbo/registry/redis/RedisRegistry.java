@@ -15,6 +15,20 @@
  */
 package com.alibaba.dubbo.registry.redis;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.utils.NamedThreadFactory;
+import com.alibaba.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.common.utils.UrlUtils;
+import com.alibaba.dubbo.registry.NotifyListener;
+import com.alibaba.dubbo.registry.support.FailbackRegistry;
+import com.alibaba.dubbo.rpc.RpcException;
+import org.apache.commons.pool.impl.GenericObjectPool;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPubSub;
+import redis.clients.jedis.exceptions.JedisConnectionException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,24 +47,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.alibaba.dubbo.common.utils.StringUtils;
-import org.apache.commons.pool.impl.GenericObjectPool;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPubSub;
-
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.NamedThreadFactory;
-import com.alibaba.dubbo.common.utils.UrlUtils;
-import com.alibaba.dubbo.registry.NotifyListener;
-import com.alibaba.dubbo.registry.support.FailbackRegistry;
-import com.alibaba.dubbo.rpc.RpcException;
-import redis.clients.jedis.exceptions.JedisConnectionException;
-
 /**
  * RedisRegistry
  *
@@ -58,7 +54,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
  */
 public class RedisRegistry extends FailbackRegistry {
 
-    private static final Logger logger = LoggerFactory.getLogger(RedisRegistry.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(RedisRegistry.class);
 
     private static final int DEFAULT_REDIS_PORT = 6379;
 

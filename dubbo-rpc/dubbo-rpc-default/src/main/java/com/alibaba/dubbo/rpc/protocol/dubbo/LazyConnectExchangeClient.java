@@ -15,16 +15,8 @@
  */
 package com.alibaba.dubbo.rpc.protocol.dubbo;
 
-import java.net.InetSocketAddress;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.Parameters;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.RemotingException;
@@ -32,6 +24,11 @@ import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
 import com.alibaba.dubbo.remoting.exchange.ExchangeHandler;
 import com.alibaba.dubbo.remoting.exchange.Exchangers;
 import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
+
+import java.net.InetSocketAddress;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * dubbo protocol support class.
@@ -41,7 +38,7 @@ import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
 @SuppressWarnings("deprecation")
 final class LazyConnectExchangeClient implements ExchangeClient{
 
-    private final static Logger logger = LoggerFactory.getLogger(LazyConnectExchangeClient.class); 
+    private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(LazyConnectExchangeClient.class);
 
     private final URL                     url;
     private final ExchangeHandler         requestHandler;
@@ -112,7 +109,7 @@ final class LazyConnectExchangeClient implements ExchangeClient{
     private void warning(Object request){
         if (requestWithWarning ){
             if (warningcount.get() % 5000 == 0){
-                logger.warn(new IllegalStateException("safe guard client , should not be called ,must have a bug."));
+                logger.warn("", new IllegalStateException("safe guard client , should not be called ,must have a bug."));
             }
             warningcount.incrementAndGet() ;
         }
@@ -175,11 +172,6 @@ final class LazyConnectExchangeClient implements ExchangeClient{
         client.reset(url);
     }
     
-    @Deprecated
-    public void reset(Parameters parameters){
-        reset(getUrl().addParameters(parameters.getParameters()));
-    }
-
     public void reconnect() throws RemotingException {
         checkClient();
         client.reconnect();

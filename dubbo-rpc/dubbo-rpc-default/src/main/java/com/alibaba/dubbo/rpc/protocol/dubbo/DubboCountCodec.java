@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.remoting.Channel;
-import com.alibaba.dubbo.remoting.Codec2;
+import com.alibaba.dubbo.remoting.Codec;
 import com.alibaba.dubbo.remoting.buffer.ChannelBuffer;
 import com.alibaba.dubbo.remoting.exchange.Request;
 import com.alibaba.dubbo.remoting.exchange.Response;
@@ -31,7 +31,7 @@ import com.alibaba.dubbo.rpc.RpcResult;
 /**
  * @author <a href="mailto:gang.lvg@alibaba-inc.com">kimi</a>
  */
-public final class DubboCountCodec implements Codec2 {
+public final class DubboCountCodec implements Codec {
 
     private DubboCodec codec = new DubboCodec();
 
@@ -44,7 +44,7 @@ public final class DubboCountCodec implements Codec2 {
         MultiMessage result = MultiMessage.create();
         do {
             Object obj = codec.decode(channel, buffer);
-            if (Codec2.DecodeResult.NEED_MORE_INPUT == obj) {
+            if (Codec.DecodeResult.NEED_MORE_INPUT == obj) {
                 buffer.readerIndex(save);
                 break;
             } else {
@@ -54,7 +54,7 @@ public final class DubboCountCodec implements Codec2 {
             }
         } while (true);
         if (result.isEmpty()) {
-            return Codec2.DecodeResult.NEED_MORE_INPUT;
+            return Codec.DecodeResult.NEED_MORE_INPUT;
         }
         if (result.size() == 1) {
             return result.get(0);

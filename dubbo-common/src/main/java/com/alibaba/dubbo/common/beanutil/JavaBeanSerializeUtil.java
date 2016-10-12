@@ -15,6 +15,8 @@
  */
 package com.alibaba.dubbo.common.beanutil;
 
+import com.alibaba.dubbo.common.utils.ReflectUtils;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -25,17 +27,12 @@ import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.LogHelper;
-import com.alibaba.dubbo.common.utils.ReflectUtils;
-
 /**
  * @author <a href="mailto:gang.lvg@taobao.com">kimi</a>
  */
 public final class JavaBeanSerializeUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(JavaBeanSerializeUtil.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(JavaBeanSerializeUtil.class);
 
     public static JavaBeanDescriptor serialize(Object obj) {
         JavaBeanDescriptor result = serialize(obj, JavaBeanAccessor.FIELD);
@@ -248,7 +245,7 @@ public final class JavaBeanSerializeUtil {
                         setByMethod = true;
                     }
                 } catch (Exception e) {
-                    LogHelper.warn(logger, "Failed to set property through method " + method, e);
+                    logger.warn("Failed to set property through method " + method, e);
                 }
 
                 if (!setByMethod) {
@@ -258,9 +255,9 @@ public final class JavaBeanSerializeUtil {
                             field.set(result, value);
                         }
                     } catch (NoSuchFieldException e1) {
-                        LogHelper.warn(logger, "Failed to set field value", e1);
+                        logger.warn("Failed to set field value", e1);
                     } catch (IllegalAccessException e1) {
-                        LogHelper.warn(logger, "Failed to set field value", e1);
+                        logger.warn("Failed to set field value", e1);
                     }
                 }
             }
@@ -309,11 +306,11 @@ public final class JavaBeanSerializeUtil {
                 constructor.setAccessible(true);
                 return constructor.newInstance(constructorArgs);
             } catch (InstantiationException e) {
-                LogHelper.warn(logger, e.getMessage(), e);
+                logger.warn(e.getMessage(), e);
             } catch (IllegalAccessException e) {
-                LogHelper.warn(logger, e.getMessage(), e);
+                logger.warn(e.getMessage(), e);
             } catch (InvocationTargetException e) {
-                LogHelper.warn(logger, e.getMessage(), e);
+                logger.warn(e.getMessage(), e);
             }
         }
 

@@ -337,7 +337,9 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
 	private T createProxy(Map<String, String> map) {
 		URL tmpUrl = new URL("temp", "localhost", 0, map);
 		final boolean isJvmRefer;
-        if (isInjvm() == null) {
+        if(Constants.SCOPE_LOCAL.equals(getScope())) {
+            isJvmRefer = true;
+        } else {
             if (url != null && url.length() > 0) { //指定URL的情况下，不做本地引用
                 isJvmRefer = false;
             } else if (InjvmProtocol.getInjvmProtocol().isInjvmRefer(tmpUrl)) {
@@ -346,10 +348,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
             } else {
                 isJvmRefer = false;
             }
-        } else {
-            isJvmRefer = isInjvm().booleanValue();
         }
-		
+		//
 		if (isJvmRefer) {
 			URL url = new URL(Constants.LOCAL_PROTOCOL, NetUtils.LOCALHOST, 0, interfaceClass.getName()).addParameters(map);
 			invoker = refprotocol.refer(interfaceClass, url);
@@ -452,16 +452,6 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
 	    return interfaceClass;
 	}
 	
-	/**
-	 * @deprecated
-	 * @see #setInterface(Class)
-	 * @param interfaceClass
-	 */
-	@Deprecated
-	public void setInterfaceClass(Class<?> interfaceClass) {
-	    setInterface(interfaceClass);
-	}
-
     public String getInterface() {
         return interfaceName;
     }

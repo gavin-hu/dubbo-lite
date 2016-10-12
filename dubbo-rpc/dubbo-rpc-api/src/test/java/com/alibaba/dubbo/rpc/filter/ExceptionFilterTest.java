@@ -15,17 +15,15 @@
  */
 package com.alibaba.dubbo.rpc.filter;
 
-import static org.junit.Assert.assertEquals;
-
-import org.easymock.EasyMock;
-import org.junit.Test;
-
-import com.alibaba.dubbo.common.logger.Logger;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.RpcInvocation;
 import com.alibaba.dubbo.rpc.support.DemoService;
+import org.easymock.EasyMock;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * ExceptionFilterTest
@@ -37,7 +35,7 @@ public class ExceptionFilterTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testRpcException() {
-        Logger logger = EasyMock.createMock(Logger.class);
+        org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ExceptionFilterTest.class);
         RpcContext.getContext().setRemoteAddress("127.0.0.1", 1234);
         RpcException exception = new RpcException("TestRpcException");
         logger.error(EasyMock.eq("Got unchecked and undeclared exception which called by 127.0.0.1. service: " + DemoService.class.getName() + ", method: sayHello, exception: " + RpcException.class.getName() + ": TestRpcException"), EasyMock.eq(exception));

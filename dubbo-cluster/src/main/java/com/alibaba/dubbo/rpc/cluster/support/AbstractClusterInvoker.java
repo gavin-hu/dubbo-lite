@@ -15,15 +15,10 @@
  */
 package com.alibaba.dubbo.rpc.cluster.support;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.Version;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
@@ -33,6 +28,9 @@ import com.alibaba.dubbo.rpc.cluster.Directory;
 import com.alibaba.dubbo.rpc.cluster.LoadBalance;
 import com.alibaba.dubbo.rpc.support.RpcUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * AbstractClusterInvoker
  * 
@@ -41,8 +39,8 @@ import com.alibaba.dubbo.rpc.support.RpcUtils;
  */
 public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
 
-    private static final Logger                logger                            = LoggerFactory
-                                                                                         .getLogger(AbstractClusterInvoker.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractClusterInvoker.class);
+
     protected final Directory<T>               directory;
 
     protected final boolean                    availablecheck;
@@ -90,7 +88,6 @@ public abstract class AbstractClusterInvoker<T> implements Invoker<T> {
      * a)先lb选择，如果在selected列表中 或者 不可用且做检验时，进入下一步(重选),否则直接返回</br>
      * b)重选验证规则：selected > available .保证重选出的结果尽量不在select中，并且是可用的 
      * 
-     * @param availablecheck 如果设置true，在选择的时候先选invoker.available == true
      * @param selected 已选过的invoker.注意：输入保证不重复
      * 
      */

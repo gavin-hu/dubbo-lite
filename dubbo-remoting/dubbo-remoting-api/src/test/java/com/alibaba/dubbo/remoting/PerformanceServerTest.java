@@ -15,21 +15,17 @@
  */
 package com.alibaba.dubbo.remoting;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.exchange.ExchangeChannel;
 import com.alibaba.dubbo.remoting.exchange.ExchangeServer;
 import com.alibaba.dubbo.remoting.exchange.Exchangers;
 import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
 import com.alibaba.dubbo.remoting.transport.dispatcher.execution.ExecutionDispatcher;
+import junit.framework.TestCase;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * PerformanceServer
@@ -40,7 +36,7 @@ import com.alibaba.dubbo.remoting.transport.dispatcher.execution.ExecutionDispat
  */
 public class PerformanceServerTest extends TestCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(PerformanceServerTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PerformanceServerTest.class);
     private static ExchangeServer server = null;
     @Test
     public void testServer() throws Exception {

@@ -15,6 +15,10 @@
  */
 package com.alibaba.dubbo.common.utils;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.io.UnsafeStringWriter;
+import com.alibaba.dubbo.common.json.JSON;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -26,12 +30,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.io.UnsafeStringWriter;
-import com.alibaba.dubbo.common.json.JSON;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-
 /**
  * StringUtils
  * 
@@ -40,7 +38,7 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
 
 public final class StringUtils {
 
-    private static final Logger logger = LoggerFactory.getLogger(StringUtils.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(StringUtils.class);
 
 	public static final String[] EMPTY_STRING_ARRAY = new String[0];
 

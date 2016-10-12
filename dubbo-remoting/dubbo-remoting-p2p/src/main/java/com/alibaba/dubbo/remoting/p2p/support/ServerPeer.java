@@ -15,15 +15,8 @@
  */
 package com.alibaba.dubbo.remoting.p2p.support;
 
-import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.Client;
 import com.alibaba.dubbo.remoting.RemotingException;
@@ -32,6 +25,11 @@ import com.alibaba.dubbo.remoting.p2p.Group;
 import com.alibaba.dubbo.remoting.p2p.Peer;
 import com.alibaba.dubbo.remoting.transport.ServerDelegate;
 
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+
 /**
  * ServerPeer
  * 
@@ -39,7 +37,7 @@ import com.alibaba.dubbo.remoting.transport.ServerDelegate;
  */
 public class ServerPeer extends ServerDelegate implements Peer {
     
-    private static final Logger logger = LoggerFactory.getLogger(ServerPeer.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ServerPeer.class);
 
     private final Map<URL, Client> clients;
 

@@ -16,17 +16,7 @@
 package com.alibaba.dubbo.remoting.telnet.support.command;
 
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.common.logger.Level;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.telnet.TelnetHandler;
 import com.alibaba.dubbo.remoting.telnet.support.Help;
@@ -43,9 +33,10 @@ public class LogTelnetHandler implements TelnetHandler {
     public static final String SERVICE_KEY = "telnet.log";
 
     public String telnet(Channel channel, String message) {
+        /*
         long size = 0 ;
-        File file = LoggerFactory.getFile();
         StringBuffer buf = new StringBuffer();
+        File file = LoggerFactory.getFile();
         if (message == null || message.trim().length() == 0) {
             buf.append("EXAMPLE: log error / log 100");
         }else {
@@ -96,7 +87,8 @@ public class LogTelnetHandler implements TelnetHandler {
         }
         buf.append("\r\nCURRENT LOG LEVEL:"+ LoggerFactory.getLevel())
         .append("\r\nCURRENT LOG APPENDER:"+ (file == null ? "console" : file.getAbsolutePath()));
-        return buf.toString();
+        return buf.toString();*/
+        throw new UnsupportedOperationException();
     }
 
 }

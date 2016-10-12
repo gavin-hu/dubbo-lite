@@ -15,8 +15,6 @@
  */
 package com.alibaba.dubbo.rpc.protocol;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.rpc.Exporter;
 import com.alibaba.dubbo.rpc.Invoker;
 
@@ -28,7 +26,7 @@ import com.alibaba.dubbo.rpc.Invoker;
  */
 public abstract class AbstractExporter<T> implements Exporter<T> {
 
-    protected final Logger   logger     = LoggerFactory.getLogger(getClass());
+    protected final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass());
 
     private final Invoker<T> invoker;
 

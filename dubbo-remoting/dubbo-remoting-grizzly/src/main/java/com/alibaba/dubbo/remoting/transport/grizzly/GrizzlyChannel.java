@@ -15,22 +15,19 @@
  */
 package com.alibaba.dubbo.remoting.transport.grizzly;
 
-import java.net.InetSocketAddress;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.remoting.ChannelHandler;
+import com.alibaba.dubbo.remoting.RemotingException;
+import com.alibaba.dubbo.remoting.transport.AbstractChannel;
 import org.glassfish.grizzly.Connection;
 import org.glassfish.grizzly.Grizzly;
 import org.glassfish.grizzly.GrizzlyFuture;
 import org.glassfish.grizzly.attributes.Attribute;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.remoting.ChannelHandler;
-import com.alibaba.dubbo.remoting.RemotingException;
-import com.alibaba.dubbo.remoting.transport.AbstractChannel;
+import java.net.InetSocketAddress;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * GrizzlyChannel
@@ -39,7 +36,7 @@ import com.alibaba.dubbo.remoting.transport.AbstractChannel;
  */
 final class GrizzlyChannel extends AbstractChannel {
 
-    private static final Logger logger = LoggerFactory.getLogger(GrizzlyChannel.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(GrizzlyChannel.class);
 
     private static final String CHANNEL_KEY = GrizzlyChannel.class.getName() + ".CHANNEL";
     

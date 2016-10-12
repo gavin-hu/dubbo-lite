@@ -15,12 +15,8 @@
  */
 package com.alibaba.dubbo.remoting.exchange.support.header;
 
-import java.net.InetSocketAddress;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.RemotingException;
@@ -31,6 +27,8 @@ import com.alibaba.dubbo.remoting.exchange.Response;
 import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
 import com.alibaba.dubbo.remoting.exchange.support.DefaultFuture;
 
+import java.net.InetSocketAddress;
+
 /**
  * ExchangeReceiver
  * 
@@ -38,7 +36,7 @@ import com.alibaba.dubbo.remoting.exchange.support.DefaultFuture;
  */
 final class HeaderExchangeChannel implements ExchangeChannel {
 
-    private static final Logger logger      = LoggerFactory.getLogger(HeaderExchangeChannel.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(HeaderExchangeChannel.class);
 
     private static final String CHANNEL_KEY = HeaderExchangeChannel.class.getName() + ".CHANNEL";
 

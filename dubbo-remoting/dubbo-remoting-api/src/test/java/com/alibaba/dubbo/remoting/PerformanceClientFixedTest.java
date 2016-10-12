@@ -15,22 +15,18 @@
  */
 package com.alibaba.dubbo.remoting;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
+import com.alibaba.dubbo.remoting.exchange.Exchangers;
+import junit.framework.TestCase;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
-import com.alibaba.dubbo.remoting.exchange.Exchangers;
-
 public class PerformanceClientFixedTest extends TestCase {
 
-    private static final Logger logger = LoggerFactory.getLogger(PerformanceClientTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PerformanceClientTest.class);
 
     @Test
     public void testClient() throws Exception {

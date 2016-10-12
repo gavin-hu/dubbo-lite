@@ -19,12 +19,8 @@ import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.Resetable;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.remoting.Codec2;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.Codec;
-import com.alibaba.dubbo.remoting.transport.codec.CodecAdapter;
 
 /**
  * AbstractEndpoint
@@ -33,9 +29,9 @@ import com.alibaba.dubbo.remoting.transport.codec.CodecAdapter;
  */
 public abstract class AbstractEndpoint extends AbstractPeer implements Resetable {
     
-    private static final Logger logger = LoggerFactory.getLogger(AbstractEndpoint.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(AbstractEndpoint.class);
 
-    private Codec2                codec;
+    private Codec codec;
 
     private int                   timeout;
 
@@ -82,12 +78,7 @@ public abstract class AbstractEndpoint extends AbstractPeer implements Resetable
         }
     }
     
-    @Deprecated
-    public void reset(com.alibaba.dubbo.common.Parameters parameters){
-        reset(getUrl().addParameters(parameters.getParameters()));
-    }
-
-    protected Codec2 getCodec() {
+    protected Codec getCodec() {
         return codec;
     }
 
@@ -99,14 +90,9 @@ public abstract class AbstractEndpoint extends AbstractPeer implements Resetable
         return connectTimeout;
     }
 
-    protected static Codec2 getChannelCodec(URL url) {
+    protected static Codec getChannelCodec(URL url) {
         String codecName = url.getParameter(Constants.CODEC_KEY, "telnet");
-        if (ExtensionLoader.getExtensionLoader(Codec2.class).hasExtension(codecName)) {
-            return ExtensionLoader.getExtensionLoader(Codec2.class).getExtension(codecName);
-        } else {
-            return new CodecAdapter(ExtensionLoader.getExtensionLoader(Codec.class)
-                                               .getExtension(codecName));
-        }
+        return ExtensionLoader.getExtensionLoader(Codec.class).getExtension(codecName);
     }
 
 }

@@ -15,13 +15,11 @@
  */
 package com.alibaba.dubbo.rpc.listener;
 
-import java.util.List;
-
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.rpc.Exporter;
 import com.alibaba.dubbo.rpc.ExporterListener;
 import com.alibaba.dubbo.rpc.Invoker;
+
+import java.util.List;
 
 /**
  * ListenerExporter
@@ -30,7 +28,7 @@ import com.alibaba.dubbo.rpc.Invoker;
  */
 public class ListenerExporterWrapper<T> implements Exporter<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ListenerExporterWrapper.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ListenerExporterWrapper.class);
 
     private final Exporter<T> exporter;
     

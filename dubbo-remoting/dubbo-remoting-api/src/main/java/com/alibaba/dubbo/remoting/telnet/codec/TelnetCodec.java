@@ -15,22 +15,20 @@
  */
 package com.alibaba.dubbo.remoting.telnet.codec;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.remoting.Channel;
+import com.alibaba.dubbo.remoting.RemotingException;
+import com.alibaba.dubbo.remoting.buffer.ChannelBuffer;
+import com.alibaba.dubbo.remoting.transport.codec.TransportCodec;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.StringUtils;
-import com.alibaba.dubbo.remoting.Channel;
-import com.alibaba.dubbo.remoting.RemotingException;
-import com.alibaba.dubbo.remoting.buffer.ChannelBuffer;
-import com.alibaba.dubbo.remoting.transport.codec.TransportCodec;
 
 /**
  * TelnetCodec
@@ -41,7 +39,7 @@ import com.alibaba.dubbo.remoting.transport.codec.TransportCodec;
  */
 public class TelnetCodec extends TransportCodec {
 
-    private static final Logger  logger = LoggerFactory.getLogger(TelnetCodec.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(TelnetCodec.class);
     
     private static final String HISTORY_LIST_KEY = "telnet.history.list";
 
@@ -97,7 +95,7 @@ public class TelnetCodec extends TransportCodec {
         for (Object command : EXIT) {
             if (isEquals(message, (byte[]) command)) {
                 if (logger.isInfoEnabled()) {
-                    logger.info(new Exception("Close channel " + channel + " on exit command: " + Arrays.toString((byte[])command)));
+                    logger.info("", new Exception("Close channel " + channel + " on exit command: " + Arrays.toString((byte[])command)));
                 }
                 channel.close();
                 return null;
@@ -156,7 +154,7 @@ public class TelnetCodec extends TransportCodec {
         for (Object command : EXIT) {
             if (isEquals(message, (byte[]) command)) {
                 if (logger.isInfoEnabled()) {
-                    logger.info(new Exception("Close channel " + channel + " on exit command " + command));
+                    logger.info("", new Exception("Close channel " + channel + " on exit command " + command));
                 }
                 channel.close();
                 return null;

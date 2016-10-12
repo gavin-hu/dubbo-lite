@@ -15,16 +15,14 @@
  */
 package com.alibaba.dubbo.rpc.listener;
 
-import java.util.List;
-
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
+import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.InvokerListener;
-import com.alibaba.dubbo.rpc.RpcException;
-import com.alibaba.dubbo.rpc.Invocation;
 import com.alibaba.dubbo.rpc.Result;
+import com.alibaba.dubbo.rpc.RpcException;
+
+import java.util.List;
 
 /**
  * ListenerInvoker
@@ -33,7 +31,7 @@ import com.alibaba.dubbo.rpc.Result;
  */
 public class ListenerInvokerWrapper<T> implements Invoker<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(ListenerInvokerWrapper.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ListenerInvokerWrapper.class);
 
     private final Invoker<T> invoker;
     

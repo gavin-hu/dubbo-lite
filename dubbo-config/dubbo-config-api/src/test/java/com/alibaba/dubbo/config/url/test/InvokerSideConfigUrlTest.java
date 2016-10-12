@@ -15,17 +15,7 @@
  */
 package com.alibaba.dubbo.config.url.test;
 
-import java.util.Arrays;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ConsumerConfig;
 import com.alibaba.dubbo.config.MethodConfig;
@@ -33,6 +23,13 @@ import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.api.DemoService;
 import com.alibaba.dubbo.config.support.MockRegistry;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import java.util.Arrays;
  
 
 /**
@@ -40,7 +37,7 @@ import com.alibaba.dubbo.config.support.MockRegistry;
  *
  */
 public class InvokerSideConfigUrlTest extends UrlTestBase {
-    private static final Logger log = LoggerFactory.getLogger(InvokerSideConfigUrlTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(InvokerSideConfigUrlTest.class);
 
     // ======================================================
     //   invoker related data preparing

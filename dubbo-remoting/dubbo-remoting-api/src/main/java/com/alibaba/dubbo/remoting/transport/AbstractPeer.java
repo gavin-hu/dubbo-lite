@@ -79,14 +79,6 @@ public abstract class AbstractPeer implements Endpoint, ChannelHandler {
     }
     
     /**
-     * @return ChannelHandler
-     */
-    @Deprecated
-    public ChannelHandler getHandler() {
-        return getDelegateHandler();
-    }
-    
-    /**
      * 返回最终的handler，可能已被wrap,需要区别于getChannelHandler
      * @return ChannelHandler
      */

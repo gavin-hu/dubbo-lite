@@ -15,24 +15,22 @@
  */
 package com.alibaba.dubbo.registry.dubbo;
 
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.Version;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.NamedThreadFactory;
 import com.alibaba.dubbo.common.utils.NetUtils;
 import com.alibaba.dubbo.registry.NotifyListener;
 import com.alibaba.dubbo.registry.RegistryService;
 import com.alibaba.dubbo.registry.support.FailbackRegistry;
 import com.alibaba.dubbo.rpc.Invoker;
+
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * DubboRegistry
@@ -41,7 +39,7 @@ import com.alibaba.dubbo.rpc.Invoker;
  */
 public class DubboRegistry extends FailbackRegistry {
 
-    private final static Logger logger = LoggerFactory.getLogger(DubboRegistry.class); 
+    private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(DubboRegistry.class);
 
     // 重连检测周期3秒(单位毫秒)
     private static final int RECONNECT_PERIOD_DEFAULT = 3 * 1000;

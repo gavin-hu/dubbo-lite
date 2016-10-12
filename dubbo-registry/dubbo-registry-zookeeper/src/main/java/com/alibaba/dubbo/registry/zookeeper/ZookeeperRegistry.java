@@ -15,25 +15,23 @@
  */
 package com.alibaba.dubbo.registry.zookeeper;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
 import com.alibaba.dubbo.common.utils.UrlUtils;
 import com.alibaba.dubbo.registry.NotifyListener;
 import com.alibaba.dubbo.registry.support.FailbackRegistry;
 import com.alibaba.dubbo.remoting.zookeeper.ChildListener;
-import com.alibaba.dubbo.remoting.zookeeper.ZookeeperClient;
 import com.alibaba.dubbo.remoting.zookeeper.StateListener;
+import com.alibaba.dubbo.remoting.zookeeper.ZookeeperClient;
 import com.alibaba.dubbo.remoting.zookeeper.ZookeeperTransporter;
 import com.alibaba.dubbo.rpc.RpcException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * ZookeeperRegistry
@@ -42,7 +40,7 @@ import com.alibaba.dubbo.rpc.RpcException;
  */
 public class ZookeeperRegistry extends FailbackRegistry {
 
-    private final static Logger logger = LoggerFactory.getLogger(ZookeeperRegistry.class);
+    private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ZookeeperRegistry.class);
 
     private final static int DEFAULT_ZOOKEEPER_PORT = 2181;
     

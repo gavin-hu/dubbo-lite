@@ -15,8 +15,6 @@
  */
 package com.alibaba.dubbo.remoting.transport.dispatcher;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 
@@ -25,7 +23,7 @@ import com.alibaba.dubbo.remoting.ChannelHandler;
  *
  */
 public class ChannelEventRunnable implements Runnable {
-    private static final Logger logger             = LoggerFactory.getLogger(ChannelEventRunnable.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ChannelEventRunnable.class);
 
     private final ChannelHandler handler;
     private final Channel channel;

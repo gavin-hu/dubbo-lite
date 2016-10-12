@@ -19,9 +19,6 @@ import org.jboss.netty.logging.AbstractInternalLogger;
 import org.jboss.netty.logging.InternalLogger;
 import org.jboss.netty.logging.InternalLoggerFactory;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-
 /**
  * @author <a href="mailto:gang.lvg@taobao.com">kimi</a>
  */
@@ -38,15 +35,15 @@ final class NettyHelper {
 
         @Override
         public InternalLogger newInstance(String name) {
-            return new DubboLogger(LoggerFactory.getLogger(name));
+            return new DubboLogger(org.slf4j.LoggerFactory.getLogger(name));
         }
     }
 
     static class DubboLogger extends AbstractInternalLogger {
 
-        private Logger logger;
+        private org.slf4j.Logger logger;
 
-        DubboLogger(Logger logger) {
+        DubboLogger(org.slf4j.Logger logger) {
             this.logger = logger;
         }
 

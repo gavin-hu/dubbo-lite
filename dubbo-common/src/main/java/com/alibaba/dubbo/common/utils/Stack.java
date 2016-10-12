@@ -23,8 +23,10 @@ import java.util.List;
  * Stack.
  * 
  * @author qian.lei
+ * @deprecated
+ * @see java.util.Stack
  */
-
+@Deprecated
 public class Stack<E>
 {
 	private int mSize = 0;

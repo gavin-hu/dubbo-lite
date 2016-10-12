@@ -16,20 +16,18 @@
 
 package com.alibaba.dubbo.remoting.exchange.support.header;
 
-import java.util.Collection;
-
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.Client;
 import com.alibaba.dubbo.remoting.exchange.Request;
+
+import java.util.Collection;
 
 /**
  * @author <a href="mailto:gang.lvg@alibaba-inc.com">kimi</a>
  */
 final class HeartBeatTask implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger( HeartBeatTask.class );
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger( HeartBeatTask.class );
 
     private ChannelProvider channelProvider;
 

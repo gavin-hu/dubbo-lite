@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -69,6 +70,11 @@ public class HttpClientConnection implements HessianConnection {
 
     public String getStatusMessage() {
         return response == null || response.getStatusLine() == null ? null :  response.getStatusLine().getReasonPhrase();
+    }
+
+    @Override
+    public String getContentEncoding() {
+        return Charset.defaultCharset().toString();
     }
 
     public InputStream getInputStream() throws IOException {

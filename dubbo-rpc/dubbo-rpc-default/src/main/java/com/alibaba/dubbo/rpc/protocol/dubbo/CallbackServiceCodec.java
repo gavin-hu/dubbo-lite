@@ -15,17 +15,10 @@
  */
 package com.alibaba.dubbo.rpc.protocol.dubbo;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.common.bytecode.Wrapper;
 import com.alibaba.dubbo.common.extension.ExtensionLoader;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
 import com.alibaba.dubbo.common.utils.StringUtils;
 import com.alibaba.dubbo.remoting.Channel;
@@ -36,13 +29,18 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.ProxyFactory;
 import com.alibaba.dubbo.rpc.RpcInvocation;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * callback 服务帮助类.
  * @author chao.liuc
  *
  */
 class CallbackServiceCodec {
-    private static final Logger     logger             = LoggerFactory.getLogger(CallbackServiceCodec.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CallbackServiceCodec.class);
     
     private static final ProxyFactory proxyFactory = ExtensionLoader.getExtensionLoader(ProxyFactory.class).getAdaptiveExtension();
     private static final DubboProtocol protocol = DubboProtocol.getDubboProtocol();
@@ -73,7 +71,6 @@ class CallbackServiceCodec {
      * @param clazz
      * @param inst
      * @param export
-     * @param out
      * @throws IOException
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })

@@ -15,6 +15,8 @@
  */
 package com.alibaba.dubbo.common.utils;
 
+import com.alibaba.dubbo.common.URL;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -26,10 +28,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-
 /**
  * IP and Port Helper for RPC, 
  * 
@@ -38,7 +36,7 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
 
 public class NetUtils {
     
-    private static final Logger logger = LoggerFactory.getLogger(NetUtils.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(NetUtils.class);
 
     public static final String LOCALHOST = "127.0.0.1";
 

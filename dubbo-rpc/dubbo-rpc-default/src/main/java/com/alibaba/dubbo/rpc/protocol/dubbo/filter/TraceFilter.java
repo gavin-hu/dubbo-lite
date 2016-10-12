@@ -15,17 +15,9 @@
  */
 package com.alibaba.dubbo.rpc.protocol.dubbo.filter;
 
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;
 import com.alibaba.dubbo.common.json.JSON;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.rpc.Filter;
@@ -35,6 +27,12 @@ import com.alibaba.dubbo.rpc.Result;
 import com.alibaba.dubbo.rpc.RpcContext;
 import com.alibaba.dubbo.rpc.RpcException;
 
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * TraceFilter
  * 
@@ -43,7 +41,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 @Activate(group = Constants.PROVIDER)
 public class TraceFilter implements Filter {
     
-    private static final Logger logger = LoggerFactory.getLogger(TraceFilter.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(TraceFilter.class);
     
     private static final String TRACE_MAX = "trace.max";
     

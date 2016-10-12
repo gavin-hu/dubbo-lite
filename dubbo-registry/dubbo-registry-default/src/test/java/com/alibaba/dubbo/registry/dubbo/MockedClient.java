@@ -15,19 +15,18 @@
  */
 package com.alibaba.dubbo.registry.dubbo;
 
-import java.net.InetSocketAddress;
-import java.util.Map;
-
 import com.alibaba.dubbo.common.URL;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.ChannelHandler;
-import com.alibaba.dubbo.remoting.Codec;
 import com.alibaba.dubbo.remoting.RemotingException;
 import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
 import com.alibaba.dubbo.remoting.exchange.ExchangeHandler;
 import com.alibaba.dubbo.remoting.exchange.ResponseCallback;
 import com.alibaba.dubbo.remoting.exchange.ResponseFuture;
 import com.alibaba.dubbo.remoting.exchange.support.Replier;
+
+import java.net.InetSocketAddress;
+import java.util.Map;
 
 /**
  * MockedClient
@@ -157,13 +156,6 @@ public class MockedClient implements ExchangeClient {
 		return closed;
 	}
 
-	public Codec getCodec() {
-		return null;
-	}
-
-	public void setCodec(Codec codec) {
-	}
-
     public void setHost(String host) {
     }
 
@@ -257,8 +249,4 @@ public class MockedClient implements ExchangeClient {
     public void reset(URL url) {
     }
 
-    @Deprecated
-    public void reset(com.alibaba.dubbo.common.Parameters parameters) {
-    }
-    
 }

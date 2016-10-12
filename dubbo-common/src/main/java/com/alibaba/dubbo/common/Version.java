@@ -15,15 +15,13 @@
  */
 package com.alibaba.dubbo.common;
 
+import com.alibaba.dubbo.common.utils.ClassHelper;
+
 import java.net.URL;
 import java.security.CodeSource;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.ClassHelper;
 
 /**
  * Version
@@ -34,7 +32,7 @@ public final class Version {
 
     private Version() {}
 
-    private static final Logger logger = LoggerFactory.getLogger(Version.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Version.class);
 
     private static final String VERSION = getVersion(Version.class, "2.0.0");
 

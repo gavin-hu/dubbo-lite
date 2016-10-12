@@ -15,9 +15,14 @@
  */
 package com.alibaba.dubbo.remoting.transport.netty;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.Version;
+import com.alibaba.dubbo.common.utils.NamedThreadFactory;
+import com.alibaba.dubbo.common.utils.NetUtils;
+import com.alibaba.dubbo.remoting.ChannelHandler;
+import com.alibaba.dubbo.remoting.RemotingException;
+import com.alibaba.dubbo.remoting.transport.AbstractClient;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFactory;
@@ -27,16 +32,8 @@ import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.Version;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.NamedThreadFactory;
-import com.alibaba.dubbo.common.utils.NetUtils;
-import com.alibaba.dubbo.remoting.ChannelHandler;
-import com.alibaba.dubbo.remoting.RemotingException;
-import com.alibaba.dubbo.remoting.transport.AbstractClient;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * NettyClient.
@@ -46,7 +43,7 @@ import com.alibaba.dubbo.remoting.transport.AbstractClient;
  */
 public class NettyClient extends AbstractClient {
     
-    private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(NettyClient.class);
 
     // 因ChannelFactory的关闭有DirectMemory泄露，采用静态化规避
     // https://issues.jboss.org/browse/NETTY-424

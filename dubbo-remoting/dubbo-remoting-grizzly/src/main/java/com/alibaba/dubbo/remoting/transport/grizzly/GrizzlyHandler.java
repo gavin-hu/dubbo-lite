@@ -15,19 +15,16 @@
  */
 package com.alibaba.dubbo.remoting.transport.grizzly;
 
-import java.io.IOException;
-
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.utils.StringUtils;
+import com.alibaba.dubbo.remoting.ChannelHandler;
+import com.alibaba.dubbo.remoting.RemotingException;
 import org.glassfish.grizzly.Connection;
 import org.glassfish.grizzly.filterchain.BaseFilter;
 import org.glassfish.grizzly.filterchain.FilterChainContext;
 import org.glassfish.grizzly.filterchain.NextAction;
 
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.StringUtils;
-import com.alibaba.dubbo.remoting.ChannelHandler;
-import com.alibaba.dubbo.remoting.RemotingException;
+import java.io.IOException;
 
 /**
  * GrizzlyHandler
@@ -36,7 +33,7 @@ import com.alibaba.dubbo.remoting.RemotingException;
  */
 public class GrizzlyHandler extends BaseFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(GrizzlyHandler.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(GrizzlyHandler.class);
 
     private final URL url;
     

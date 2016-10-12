@@ -15,6 +15,13 @@
  */
 package com.alibaba.dubbo.remoting;
 
+import com.alibaba.dubbo.common.Constants;
+import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
+import com.alibaba.dubbo.remoting.exchange.Exchangers;
+import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
+import junit.framework.TestCase;
+import org.junit.Test;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,17 +29,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-
-import junit.framework.TestCase;
-
-import org.junit.Test;
-
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.remoting.exchange.ExchangeClient;
-import com.alibaba.dubbo.remoting.exchange.Exchangers;
-import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
 
 /**
  * PerformanceClientTest
@@ -43,7 +39,7 @@ import com.alibaba.dubbo.remoting.exchange.support.ExchangeHandlerAdapter;
  */
 public class PerformanceClientTest extends TestCase {
     
-    private static final Logger logger = LoggerFactory.getLogger(PerformanceClientTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(PerformanceClientTest.class);
 
     @Test
     @SuppressWarnings("unchecked")

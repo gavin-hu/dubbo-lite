@@ -17,8 +17,6 @@
 package com.alibaba.dubbo.remoting.exchange.support.header;
 
 import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.Channel;
 import com.alibaba.dubbo.remoting.ChannelHandler;
 import com.alibaba.dubbo.remoting.RemotingException;
@@ -31,7 +29,7 @@ import com.alibaba.dubbo.remoting.transport.AbstractChannelHandlerDelegate;
  */
 public class HeartbeatHandler extends AbstractChannelHandlerDelegate {
 
-    private static final Logger logger = LoggerFactory.getLogger(HeartbeatHandler.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(HeartbeatHandler.class);
 
     public static String KEY_READ_TIMESTAMP = "READ_TIMESTAMP";
 

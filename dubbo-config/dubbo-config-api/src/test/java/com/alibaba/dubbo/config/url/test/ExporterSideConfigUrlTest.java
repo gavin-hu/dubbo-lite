@@ -16,16 +16,13 @@
 package com.alibaba.dubbo.config.url.test;
 
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 
 /**
@@ -34,7 +31,7 @@ import com.alibaba.dubbo.common.logger.LoggerFactory;
  */
 public class ExporterSideConfigUrlTest extends UrlTestBase {
     
-    private static final Logger log = LoggerFactory.getLogger(ExporterSideConfigUrlTest.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(ExporterSideConfigUrlTest.class);
     
     // ======================================================
     //   tests start

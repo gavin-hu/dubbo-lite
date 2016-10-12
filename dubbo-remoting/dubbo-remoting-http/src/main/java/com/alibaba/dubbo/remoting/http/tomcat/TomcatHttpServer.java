@@ -18,8 +18,6 @@ package com.alibaba.dubbo.remoting.http.tomcat;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import com.alibaba.dubbo.remoting.http.HttpHandler;
 import com.alibaba.dubbo.remoting.http.servlet.DispatcherServlet;
 import com.alibaba.dubbo.remoting.http.servlet.ServletManager;
@@ -36,7 +34,7 @@ import java.io.File;
  */
 public class TomcatHttpServer extends AbstractHttpServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(TomcatHttpServer.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(TomcatHttpServer.class);
 
     private final Tomcat tomcat;
 
