@@ -15,12 +15,9 @@
  */
 package com.alibaba.dubbo.rpc.protocol.rest.support;
 
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
 import org.apache.commons.io.IOUtils;
 
 import javax.annotation.Priority;
-import javax.ws.rs.Priorities;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.ClientRequestContext;
 import javax.ws.rs.client.ClientRequestFilter;
@@ -50,7 +47,7 @@ import java.util.Map;
 @Priority(Integer.MIN_VALUE)
 public class LoggingFilter implements ContainerRequestFilter, ClientRequestFilter, ContainerResponseFilter, ClientResponseFilter, WriterInterceptor, ReaderInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(LoggingFilter.class);
 
     public void filter(ClientRequestContext context) throws IOException {
         logHttpHeaders(context.getStringHeaders());
