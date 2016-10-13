@@ -350,14 +350,39 @@
 	</build>
 
 	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/OpenTopsTech/dubbo-lite/issues</url>
+		<system>GitLab Issues</system>
+		<url>http://gitlab.apitops.com/PublicService/dubbo-lite/issues</url>
 	</issueManagement>
 	<scm>
-		<url>http://code.alibabatech.com/svn/dubbo/trunk</url>
-		<connection>scm:git:git@github.com:OpenTopsTech/dubbo-lite.git</connection>
-		<developerConnection>scm:git:git@github.com:OpenTopsTech/dubbo-lite.git</developerConnection>
+		<connection>scm:git:git@gitlab.apitops.com:PublicService/dubbo-lite.git</connection>
+		<developerConnection>scm:git:git@gitlab.apitops.com:PublicService/dubbo-lite.git</developerConnection>
 	</scm>
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>nexus-releases</name>
+			<url>http://repository.apitops.com/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>nexus-snapshots</name>
+			<url>http://repository.apitops.com/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<url>http://repository.apitops.com/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>nexus-releases</id>
+			<url>http://repository.apitops.com/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>nexus-snapshots</id>
+			<url>http://repository.apitops.com/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
 	<developers>
 		<!-- Tops Tech -->
 		<developer>
