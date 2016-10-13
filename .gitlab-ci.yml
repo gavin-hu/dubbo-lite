@@ -1,0 +1,32 @@
+# release branch build
+release_build:
+  stage: build
+  script:
+    - mvn clean install -Prelease -DskipTests
+  only:
+    - /^release\/\d\.\d\.\d$/
+  tags:
+    - java
+    - mvn
+
+# develop branch deploy
+develop_deploy:
+  stage: deploy
+  script:
+    - mvn clean deploy -Psnapshot -DskipTests
+  only:
+    - develop
+  tags:
+    - java
+    - mvn
+
+# tag branch deploy
+tag_deploy:
+  stage: deploy
+  script:
+    - mvn clean deploy -Prelease -DskipTests
+  only:
+    - /^\d\.\d\.\d$/
+  tags:
+    - java
+    - mvn
