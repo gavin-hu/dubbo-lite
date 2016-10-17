@@ -25,7 +25,7 @@ import com.alibaba.dubbo.common.extension.SPI;
  * 
  * @author william.liangf
  */
-@SPI("jetty")
+@SPI("tomcat")
 public interface HttpBinder {
     
     /**

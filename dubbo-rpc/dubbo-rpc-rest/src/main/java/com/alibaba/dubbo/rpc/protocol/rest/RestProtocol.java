@@ -40,11 +40,17 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.jboss.resteasy.client.jaxrs.engines.ApacheHttpClient4Engine;
+import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.jboss.resteasy.util.GetRestful;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.container.DynamicFeature;
+import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.FeatureContext;
+import javax.ws.rs.core.MediaType;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -170,8 +176,9 @@ public class RestProtocol extends AbstractProxyProtocol {
 
         ResteasyClient client = new ResteasyClientBuilder().httpEngine(engine).build();
         clients.add(client);
-
+        //
         client.register(RpcContextFilter.class);
+        //
         for (String clazz : Constants.COMMA_SPLIT_PATTERN.split(url.getParameter(Constants.EXTENSION_KEY, ""))) {
             if (!StringUtils.isEmpty(clazz)) {
                 try {
@@ -184,7 +191,15 @@ public class RestProtocol extends AbstractProxyProtocol {
 
         // TODO protocol
         ResteasyWebTarget target = client.target("http://" + url.getHost() + ":" + url.getPort() + "/" + getContextPath(url));
-        return target.proxy(serviceType);
+        Consumes consumes = serviceType.getAnnotation(Consumes.class);
+        if(consumes!=null) {
+            target.request(consumes.value());
+        }
+        //
+        return target.proxyBuilder(serviceType)
+                .defaultConsumes(MediaType.APPLICATION_JSON_TYPE)
+                .defaultProduces(MediaType.APPLICATION_JSON_TYPE)
+                .build();
     }
 
     protected int getErrorCode(Throwable e) {
