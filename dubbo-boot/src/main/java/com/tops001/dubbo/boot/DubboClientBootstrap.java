@@ -10,6 +10,8 @@ import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.ReferenceBean;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeansException;
@@ -23,6 +25,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.classreading.SimpleMetadataReaderFactory;
@@ -30,7 +33,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +44,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Gavin Hu
  * @version 1.0.0
  */
-public class DubboClientBootstrap implements ApplicationListener<ApplicationContextEvent>, BeanFactoryPostProcessor, MethodInterceptor {
+public class DubboClientBootstrap implements ApplicationListener<ApplicationContextEvent>, BeanFactoryPostProcessor {
+
+    private static final Logger logger = LoggerFactory.getLogger(DubboClientBootstrap.class);
 
     private Object lock = new Object();
 
@@ -83,7 +87,7 @@ public class DubboClientBootstrap implements ApplicationListener<ApplicationCont
         String[] referencePackages = configurableApplicationContext.getEnvironment().getProperty("dubbo.referencePackages", String[].class);
         if(referencePackages!=null) {
             for (String referencePackage : referencePackages) {
-                String scanPattern = "classpath:" + ClassUtils.convertClassNameToResourcePath(referencePackage) + "/**/*";
+                String scanPattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(referencePackage) + "/**/*.class";
                 Resource[] resources = configurableApplicationContext.getResources(scanPattern);
                 for (Resource resource : resources) {
                     MetadataReader metadataReader = metadataReaderFactory.getMetadataReader(resource);
@@ -95,9 +99,11 @@ public class DubboClientBootstrap implements ApplicationListener<ApplicationCont
                             continue;
                         }
                         //
-                        Object referenceProxy = ProxyFactory.getProxy(referenceInterface, this);
+                        Object referenceProxy = ProxyFactory.getProxy(referenceInterface, new ReferenceInterfaceInterceptor(referenceInterface));
                         //
                         beanFactory.registerSingleton(referenceInterface.getName(), referenceProxy);
+                        //
+                        logger.info("Imported reference interface [{}]", referenceInterface.getName());
                     }
                 }
             }
@@ -106,36 +112,11 @@ public class DubboClientBootstrap implements ApplicationListener<ApplicationCont
     }
 
     public void unimportReferences(ApplicationContext applicationContext) throws Exception {
-        referenceConfigs.values().forEach(referenceConfig -> referenceConfig.destroy());
-    }
-
-    @Override
-    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-        //
-        Class referenceInterface = methodInvocation.getMethod().getDeclaringClass();
-        ReferenceConfig referenceConfig = referenceConfigs.get(referenceInterface);
-        if(referenceConfig==null) {
-            synchronized (lock) {
-                referenceConfig = referenceConfigs.get(referenceInterface);
-                if(referenceConfig==null) {
-                    referenceConfig = createReferenceConfig(configurableApplicationContext, referenceInterface);
-                    referenceConfigs.put(referenceInterface, referenceConfig);
-                }
-            }
-        }
-        //
-        return ReflectionUtils.invokeMethod(methodInvocation.getMethod(), referenceConfig.get(), methodInvocation.getArguments());
-    }
-
-    private Object invokeTargetMethod(MethodInvocation methodInvocation, Object target) {
-        Class[] argumentTypes = new Class[methodInvocation.getArguments().length];
-        for(int i=0; i<argumentTypes.length; i++) {
-            argumentTypes[i] = methodInvocation.getArguments()[i].getClass();
-        }
-        //
-        Method targetMethod = ReflectionUtils.findMethod(target.getClass(), methodInvocation.getMethod().getName(), argumentTypes);
-        //
-        return ReflectionUtils.invokeMethod(targetMethod, target, methodInvocation.getArguments());
+        referenceConfigs.values().forEach(referenceConfig -> {
+            referenceConfig.destroy();
+            //
+            logger.info("Unimported reference interface [{}]", referenceConfig.getInterface());
+        });
     }
 
     private ReferenceConfig createReferenceConfig(ApplicationContext applicationContext, Class referenceInterface) throws Exception {
@@ -178,6 +159,33 @@ public class DubboClientBootstrap implements ApplicationListener<ApplicationCont
         referenceConfig.afterPropertiesSet();
         //
         return referenceConfig;
+    }
+
+    private class ReferenceInterfaceInterceptor implements MethodInterceptor {
+
+        private Class referenceInterfaceClass;
+
+        public ReferenceInterfaceInterceptor(Class referenceInterfaceClass) {
+            this.referenceInterfaceClass = referenceInterfaceClass;
+        }
+
+        @Override
+        public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+            //
+            ReferenceConfig referenceConfig = referenceConfigs.get(referenceInterfaceClass);
+            if (referenceConfig == null) {
+                synchronized (lock) {
+                    referenceConfig = referenceConfigs.get(referenceInterfaceClass);
+                    if (referenceConfig == null) {
+                        referenceConfig = createReferenceConfig(configurableApplicationContext, referenceInterfaceClass);
+                        referenceConfigs.put(referenceInterfaceClass, referenceConfig);
+                    }
+                }
+            }
+            //
+            return ReflectionUtils.invokeMethod(methodInvocation.getMethod(), referenceConfig.get(), methodInvocation.getArguments());
+        }
+
     }
 
 }

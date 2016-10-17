@@ -8,6 +8,8 @@ import com.alibaba.dubbo.config.ProviderConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.ServiceConfig;
 import com.alibaba.dubbo.config.spring.ServiceBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.PropertyAccessorFactory;
 import org.springframework.context.ApplicationContext;
@@ -17,6 +19,7 @@ import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.MetadataReader;
 import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.classreading.SimpleMetadataReaderFactory;
@@ -36,6 +39,8 @@ import java.util.Set;
  * @version 1.0.0
  */
 public class DubboServerBootstrap implements ApplicationListener<ApplicationContextEvent> {
+
+    private static final Logger logger = LoggerFactory.getLogger(DubboServerBootstrap.class);
 
     private ConfigurableApplicationContext configurableApplicationContext;
 
@@ -68,6 +73,8 @@ public class DubboServerBootstrap implements ApplicationListener<ApplicationCont
     public void unexportServices(ApplicationContext applicationContext) throws Exception {
         serviceConfigs.forEach(serviceConfig -> {
             serviceConfig.unexport();
+            //
+            logger.info("Unexported service interface [{}]", serviceConfig.getInterface());
         });
     }
 
@@ -76,21 +83,25 @@ public class DubboServerBootstrap implements ApplicationListener<ApplicationCont
         //
         DubboConfiguration dubboConfiguration = applicationContext.getBean(DubboConfiguration.class);
         //
-        for (String dubboPackage : dubboConfiguration.getReferencePackages()) {
-            String scanPattern = "classpath:" + ClassUtils.convertClassNameToResourcePath(dubboPackage) + "/**/*";
-            Resource[] resources = applicationContext.getResources(scanPattern);
-            for (Resource resource : resources) {
-                MetadataReader metadataReader = metadataReaderFactory.getMetadataReader(resource);
-                if (metadataReader.getClassMetadata().isInterface()) {
-                    //
-                    Class serviceInterface = applicationContext.getClassLoader().loadClass(metadataReader.getClassMetadata().getClassName());
-                    Object serviceImplementation = applicationContext.getBean(serviceInterface);
-                    //
-                    ServiceConfig serviceConfig = createServiceBean(applicationContext, serviceInterface, serviceImplementation);
-                    //
-                    serviceConfigs.add(serviceConfig);
-                    //
-                    serviceConfig.export();
+        if(dubboConfiguration.getServicePackages()!=null) {
+            for (String servicePackage : dubboConfiguration.getServicePackages()) {
+                String scanPattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(servicePackage) + "/**/*.class";
+                Resource[] resources = applicationContext.getResources(scanPattern);
+                for (Resource resource : resources) {
+                    MetadataReader metadataReader = metadataReaderFactory.getMetadataReader(resource);
+                    if (metadataReader.getClassMetadata().isInterface()) {
+                        //
+                        Class serviceInterface = applicationContext.getClassLoader().loadClass(metadataReader.getClassMetadata().getClassName());
+                        Object serviceImplementation = applicationContext.getBean(serviceInterface);
+                        //
+                        ServiceConfig serviceConfig = createServiceBean(applicationContext, serviceInterface, serviceImplementation);
+                        //
+                        serviceConfigs.add(serviceConfig);
+                        //
+                        serviceConfig.export();
+                        //
+                        logger.info("Exported service interface [{}]", serviceConfig.getInterface());
+                    }
                 }
             }
         }
