@@ -17,7 +17,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.alibaba</groupId>
+		<groupId>com.topstech</groupId>
 		<artifactId>dubbo-rpc</artifactId>
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
@@ -30,17 +30,17 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.topstech</groupId>
 			<artifactId>dubbo-rpc-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.topstech</groupId>
 			<artifactId>dubbo-remoting-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.topstech</groupId>
 			<artifactId>dubbo-remoting-netty</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
