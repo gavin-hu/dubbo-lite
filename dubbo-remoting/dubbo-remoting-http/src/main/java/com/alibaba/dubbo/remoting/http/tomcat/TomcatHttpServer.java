@@ -24,7 +24,10 @@ import com.alibaba.dubbo.remoting.http.servlet.ServletManager;
 import com.alibaba.dubbo.remoting.http.support.AbstractHttpServer;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
+import org.apache.catalina.filters.CorsFilter;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.tomcat.util.descriptor.web.FilterDef;
+import org.apache.tomcat.util.descriptor.web.FilterMap;
 
 import java.io.File;
 
@@ -66,6 +69,18 @@ public class TomcatHttpServer extends AbstractHttpServer {
         Context context = tomcat.addContext("/", baseDir);
         Tomcat.addServlet(context, "dispatcher", new DispatcherServlet());
         context.addServletMapping("/*", "dispatcher");
+        //
+        FilterDef corsFilterDef = new FilterDef();
+        corsFilterDef.setFilterName(CorsFilter.class.getSimpleName());
+        corsFilterDef.setFilterClass(CorsFilter.class.getName());
+        corsFilterDef.addInitParameter(CorsFilter.PARAM_CORS_ALLOWED_ORIGINS, "*");
+        context.addFilterDef(corsFilterDef);
+        //
+        FilterMap corsFilterMap = new FilterMap();
+        corsFilterMap.setFilterName(CorsFilter.class.getSimpleName());
+        corsFilterMap.addURLPattern("/*");
+        context.addFilterMap(corsFilterMap);
+        //
         ServletManager.getInstance().addServletContext(url.getPort(), context.getServletContext());
 
         try {
