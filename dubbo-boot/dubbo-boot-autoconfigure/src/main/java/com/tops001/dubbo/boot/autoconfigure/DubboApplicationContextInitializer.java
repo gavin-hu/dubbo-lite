@@ -1,4 +1,4 @@
-package com.tops001.dubbo.boot;
+package com.tops001.dubbo.boot.autoconfigure;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

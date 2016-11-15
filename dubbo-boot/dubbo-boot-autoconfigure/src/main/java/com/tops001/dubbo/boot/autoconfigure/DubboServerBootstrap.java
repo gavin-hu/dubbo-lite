@@ -1,4 +1,4 @@
-package com.tops001.dubbo.boot;
+package com.tops001.dubbo.boot.autoconfigure;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ModuleConfig;
