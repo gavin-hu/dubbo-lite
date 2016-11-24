@@ -24,6 +24,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.context.event.ContextClosedEvent;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.type.classreading.MetadataReader;
@@ -84,7 +85,7 @@ public class DubboClientBootstrap implements ApplicationListener<ApplicationCont
 
     public void registerReferenceProxies(ConfigurableListableBeanFactory beanFactory) throws Exception {
         //
-        String[] referencePackages = configurableApplicationContext.getEnvironment().getProperty("dubbo.referencePackages", String[].class);
+        String[] referencePackages = getReferencePackages(configurableApplicationContext.getEnvironment());
         if(referencePackages!=null) {
             for (String referencePackage : referencePackages) {
                 String scanPattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(referencePackage) + "/**/*.class";
@@ -117,6 +118,14 @@ public class DubboClientBootstrap implements ApplicationListener<ApplicationCont
             //
             logger.info("Unimported reference interface [{}]", referenceConfig.getInterface());
         });
+    }
+
+    private String[] getReferencePackages(Environment environment) {
+        String[] referencePackages = environment.getProperty("dubbo.reference-packages", String[].class);
+        if(referencePackages==null) {
+            referencePackages = environment.getProperty("dubbo.referencePackages", String[].class);
+        }
+        return referencePackages;
     }
 
     private ReferenceConfig createReferenceConfig(ApplicationContext applicationContext, Class referenceInterface) throws Exception {
