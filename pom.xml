@@ -45,7 +45,8 @@
 		<module>dubbo-monitor</module>
 		<module>dubbo-config</module>
 		<module>dubbo-boot</module>
-	</modules>
+        <module>dubbo</module>
+    </modules>
 
 	<properties>
 		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
