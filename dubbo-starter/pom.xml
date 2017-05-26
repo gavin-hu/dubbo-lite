@@ -9,12 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dubbo-boot</artifactId>
+    <artifactId>dubbo-starter</artifactId>
     <packaging>pom</packaging>
-
     <modules>
-        <module>dubbo-boot-autoconfigure</module>
-        <module>dubbo-boot-starter</module>
+        <module>dubbo-starter-default</module>
     </modules>
 
 </project>
