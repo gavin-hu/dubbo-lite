@@ -1,2 +1,0 @@
-org.springframework.context.ApplicationContextInitializer=com.tops001.foundation.dubbo.boot.DubboApplicationContextInitializer
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.tops001.dubbo.boot.DubboAutoConfiguration

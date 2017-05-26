@@ -17,9 +17,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.alibaba</groupId>
+		<groupId>com.tops001.dubbolite</groupId>
 		<artifactId>dubbo-config</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.0</version>
 	</parent>
 	<artifactId>dubbo-config-spring</artifactId>
 	<packaging>jar</packaging>
@@ -30,7 +30,7 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-config-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
@@ -43,36 +43,36 @@
 			<artifactId>spring-context</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-registry-default</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-monitor-default</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-rpc-default</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-rpc-rmi</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-rpc-injvm</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.alibaba</groupId>
+			<groupId>com.tops001.dubbolite</groupId>
 			<artifactId>dubbo-remoting-netty</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>test</scope>
