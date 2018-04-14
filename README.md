@@ -1,5 +1,4 @@
 ## Dubbo 历史
-* 销冠科技 dubbo-lite 3.0.0 ~ current
 * 当当网   dubbox 2.8.0 ~ 2.8.4
 * 阿里巴巴 dubbo 2.0.7 ~ 2.4.11
 
