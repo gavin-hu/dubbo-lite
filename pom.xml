@@ -16,9 +16,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.tops001.dubbolite</groupId>
+	<groupId>com.alibaba.dubbolite</groupId>
 	<artifactId>dubbo-lite</artifactId>
-	<version>3.0.0</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>The parent project of dubbo</description>
@@ -45,11 +45,11 @@
 		<module>dubbo-monitor</module>
 		<module>dubbo-config</module>
 		<module>dubbo-boot</module>
-		<module>dubbo-starter</module>
+		<module>dubbo-demo</module>
 	</modules>
 
 	<properties>
-		<spring.boot.version>1.4.1.RELEASE</spring.boot.version>
+		<spring.boot.version>1.5.12.RELEASE</spring.boot.version>
 		<!-- Common libs -->
 		<javassist.version>3.20.0-GA</javassist.version>
 		<netty.version>3.10.6.Final</netty.version>
@@ -318,50 +318,19 @@
 
 	<issueManagement>
 		<system>GitLab Issues</system>
-		<url>http://gitlab.apitops.com/PublicService/dubbo-lite/issues</url>
+		<url>https://github.com/gavin-hu/dubbo-lite/issues</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:git:git@gitlab.apitops.com:PublicService/dubbo-lite.git</connection>
-		<developerConnection>scm:git:git@gitlab.apitops.com:PublicService/dubbo-lite.git</developerConnection>
+		<connection>scm:git:git@github.com:gavin-hu/dubbo-lite.git</connection>
+		<developerConnection>scm:git:git@github.com:gavin-hu/dubbo-lite.git</developerConnection>
 	</scm>
-	<distributionManagement>
-		<repository>
-			<id>nexus</id>
-			<name>nexus-releases</name>
-			<url>http://repository.apitops.com/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus</id>
-			<name>nexus-snapshots</name>
-			<url>http://repository.apitops.com/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
 	<repositories>
 		<repository>
-			<id>nexus</id>
-			<url>http://repository.apitops.com/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>nexus-releases</id>
-			<url>http://repository.apitops.com/content/repositories/releases/</url>
-		</repository>
-		<repository>
-			<id>nexus-snapshots</id>
-			<url>http://repository.apitops.com/content/repositories/snapshots/</url>
+			<id>nexus-aliyun</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 	<developers>
-		<!-- Tops Tech -->
-		<developer>
-			<id>gavin-hu</id>
-			<name>Gavin Hu</name>
-			<email>huhz1986@gmail.com</email>
-			<roles>
-				<role>Developer</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-
 		<!-- Alibaba -->
 		<developer>
 			<name>QianXiao(Shawn)</name>

@@ -1,2 +1,2 @@
-org.springframework.context.ApplicationContextInitializer=com.tops001.dubbo.boot.autoconfigure.DubboApplicationContextInitializer
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.tops001.dubbo.boot.autoconfigure.DubboAutoConfiguration
+org.springframework.context.ApplicationContextInitializer=com.alibaba.dubbo.boot.autoconfigure.DubboApplicationContextInitializer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.alibaba.dubbo.boot.autoconfigure.DubboAutoConfiguration

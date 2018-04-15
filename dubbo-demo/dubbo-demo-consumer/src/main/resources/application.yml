@@ -1,0 +1,14 @@
+# dubbo 客户端启用开关
+dubbo.client.bootstrap: true
+# dubbo 客户端服务接口所在的包
+dubbo.referencePackages: com.alibaba.dubbo.demo.service
+# dubbo 客户端应用名，不要与服务端重名
+dubbo.application.name: dubbo-demo-consumer
+# dubbo 服务注册中心配置
+dubbo.registry.address: zookeeper://127.0.0.1:2181
+#dubbo.registry.address=multicast://224.5.6.7:1234
+#dubbo.registry.address=redis://127.0.0.1:6379
+#dubbo.registry.address=dubbo://127.0.0.1:9090
+# dubbo 协议配置
+dubbo.protocol.name: dubbo
+dubbo.protocol.port: 20880
