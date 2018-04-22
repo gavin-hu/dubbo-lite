@@ -57,9 +57,9 @@ dubbo.servicePackages: com.alibaba.dubbo.demo.service
 dubbo.application.name: dubbo-demo-provider
 # dubbo 服务注册中心配置
 dubbo.registry.address: zookeeper://127.0.0.1:2181
-#dubbo.registry.address=multicast://224.5.6.7:1234
-#dubbo.registry.address=redis://127.0.0.1:6379
-#dubbo.registry.address=dubbo://127.0.0.1:9090
+#dubbo.registry.address: multicast://224.5.6.7:1234
+#dubbo.registry.address: redis://127.0.0.1:6379
+#dubbo.registry.address: dubbo://127.0.0.1:9090
 # dubbo 协议配置
 dubbo.protocol.name: dubbo
 dubbo.protocol.port: 20880
@@ -116,9 +116,9 @@ dubbo.referencePackages: com.alibaba.dubbo.demo.service
 dubbo.application.name: dubbo-demo-consumer
 # dubbo 服务注册中心配置
 dubbo.registry.address: zookeeper://127.0.0.1:2181
-#dubbo.registry.address=multicast://224.5.6.7:1234
-#dubbo.registry.address=redis://127.0.0.1:6379
-#dubbo.registry.address=dubbo://127.0.0.1:9090
+#dubbo.registry.address: multicast://224.5.6.7:1234
+#dubbo.registry.address: redis://127.0.0.1:6379
+#dubbo.registry.address: dubbo://127.0.0.1:9090
 # dubbo 协议配置
 dubbo.protocol.name: dubbo
 dubbo.protocol.port: 20880
